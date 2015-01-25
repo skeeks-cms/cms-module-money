@@ -59,7 +59,7 @@ class Money
         }
 
         $this->amount   = $amount;
-        $this->currency = $this->handleCurrencyArgument($currency);
+        $this->currency = Currency::getInstance($currency);
     }
 
     /**
@@ -83,7 +83,7 @@ class Money
             throw new InvalidArgumentException('$value must be a string');
         }
 
-        $currency = self::handleCurrencyArgument($currency);
+        $currency = Currency::getInstance($currency);
 
         return new static(
             intval(
@@ -134,6 +134,7 @@ class Money
      */
     public function add(Money $other)
     {
+        $other = $other->convertToCurrency($this->currency);
         $this->assertSameCurrency($this, $other);
 
         $value = $this->amount + $other->getAmount();
@@ -154,6 +155,7 @@ class Money
      */
     public function subtract(Money $other)
     {
+        $other = $other->convertToCurrency($this->currency);
         $this->assertSameCurrency($this, $other);
 
         $value = $this->amount - $other->getAmount();
@@ -295,6 +297,7 @@ class Money
      */
     public function compareTo(Money $other)
     {
+        $other = $other->convertToCurrency($this->currency);
         $this->assertSameCurrency($this, $other);
 
         if ($this->amount == $other->getAmount()) {
@@ -432,20 +435,20 @@ class Money
     }
 
     /**
-     * @param  Currency|string $currency
-     * @return Currency
-     * @throws InvalidArgumentException
+     * @param $currencyTo
+     * @return Money
      */
-    private static function handleCurrencyArgument($currency)
+    public function convertToCurrency($currencyTo)
     {
-        if (!$currency instanceof Currency && !is_string($currency)) {
-            throw new InvalidArgumentException('$currency must be an object of type Currency or a string');
-        }
+        $currencyTo = Currency::getInstance($currencyTo);
 
-        if (is_string($currency)) {
-            $currency = new Currency($currency);
+        if ($crossCourse = $this->getCurrency()->getCrossCourse($currencyTo))
+        {
+            $newMoney = $this->multiply($crossCourse);
+            return new static($newMoney->getAmount(), $currencyTo);
+        } else
+        {
+            throw new InvalidArgumentException('Не удалось получить cross курс для валюты ' . $currencyTo->getCurrencyCode());
         }
-
-        return $currency;
     }
 }

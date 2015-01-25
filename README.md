@@ -4,7 +4,32 @@
 Игформация о модуле
 -------------------
 
-Модуль для работы с деньгами и валютой
+Модуль для работы с деньгами и валютой.
+За основу данного модуля, была взята библиотека https://github.com/sebastianbergmann/money, но ее пришлось изрядно допилить. Поэтому в чистом виде она не была подключена.
+
+Основная работа была в том, чтобы появилась некоторая прозрачная работа с деньгами.
+Типичны пример, который мы прозрачно решаем в этой библиотеке.
+(10$ + 154руб + 12$) = рузальтат нужно показать в GBP, для de_DE локали
+
+Сразу пример:
+
+```
+use \skeeks\modules\cms\money\Money;
+use \skeeks\modules\cms\money\IntlFormatter;
+
+$money  = Money::fromString('10', "USD");
+$money2 = Money::fromString('154', "EUR");
+$money3 = Money::fromString('12', "EUR");
+
+$money = $money->add($money2);
+$money = $money->add($money3);
+
+$money->convertToCurrency('GBP');
+
+$formatter = new IntlFormatter('de_DE');
+$formatter->format($money); //результат 132,25 £
+
+```
 
 Установка
 ------------
@@ -30,34 +55,9 @@ to the require section of your `composer.json` file.
  php yii migrate --migrationPath=vendor/skeeks/cms-module-money/migrations
 ```
 
+# Примеры и использование
 
-
-
-
-
-
-
-[![Latest Stable Version](https://poser.pugx.org/sebastian/money/v/stable.png)](https://packagist.org/packages/sebastian/money)
-[![Build Status](https://travis-ci.org/sebastianbergmann/money.png?branch=master)](https://travis-ci.org/sebastianbergmann/money)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/sebastianbergmann/money/badges/quality-score.png?s=a169d8e21dccb2892a931f12fc822adc29433065)](https://scrutinizer-ci.com/g/sebastianbergmann/money/)
-
-# Money
-
-[Value Object](http://martinfowler.com/bliki/ValueObject.html) that represents a [monetary value using a currency's smallest unit](http://martinfowler.com/eaaCatalog/money.html).
-
-## Installation
-
-Simply add a dependency on `sebastian/money` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/) to manage the dependencies of your project.
-
-Here is a minimal example of a `composer.json` file that just defines a dependency on Money:
-
-    {
-        "require": {
-            "sebastian/money": "*"
-        }
-    }
-
-## Usage Examples
+## Оригинальные примеры
 
 #### Creating a Money object and accessing its monetary value
 

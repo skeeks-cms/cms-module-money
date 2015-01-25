@@ -1125,6 +1125,37 @@ class Currency
     );
 
     /**
+     * @var static[]
+     */
+    static public $registeredCurrency = [];
+
+    /**
+     * @param $currency
+     * @return static
+     */
+    static public function getInstance($currency)
+    {
+        if (!$currency instanceof static && !is_string($currency)) {
+            throw new InvalidArgumentException('$currency must be an object of type Currency or a string');
+        }
+
+        if (is_string($currency)) {
+            if (isset(static::$registeredCurrency[$currency]))
+            {
+                return static::$registeredCurrency[$currency];
+            } else
+            {
+                $currency = new static($currency);
+                static::$registeredCurrency[$currency->currencyCode] = $currency;
+                return $currency;
+            }
+
+        }
+
+        return $currency;
+    }
+
+    /**
      * @var string
      */
     private $currencyCode;
@@ -1203,5 +1234,75 @@ class Currency
     public function __toString()
     {
         return $this->currencyCode;
+    }
+
+
+    protected $_model = null;
+
+    /**
+     * @return \skeeks\modules\cms\money\models\Currency
+     */
+    public function fetchModel()
+    {
+        return \skeeks\modules\cms\money\models\Currency::find()->where(["code" => $this->currencyCode])->one();
+    }
+
+    /**
+     * @return models\Currency
+     */
+    public function getModel()
+    {
+        if ($this->_model === null)
+        {
+            $this->_model = $this->fetchModel();
+        }
+
+        return $this->_model;
+    }
+
+    /**
+     * Текущий курс валюты
+     * @return float|null
+     */
+    public function getCourse()
+    {
+        if ($model = $this->getModel())
+        {
+            return (float) $model->course;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $currency
+     * @return bool
+     */
+    public function isSame($currency)
+    {
+        $currency = static::getInstance($currency);
+        return (bool) ($currency->currencyCode == $this->currencyCode);
+    }
+
+    /**
+     * Обратный курс по отношению к другой валюте
+     * @param Currency $currencyTo
+     * @return float|null
+     */
+    public function getCrossCourse($currencyTo)
+    {
+        if ($this->isSame($currencyTo))
+        {
+            return 1;
+        }
+
+        $currencyTo = static::getInstance($currencyTo);
+
+        if ($this->getCourse() && $currencyTo->getCourse())
+        {
+            return $this->getCourse() / $currencyTo->getCourse();
+        }
+
+        return null;
     }
 }

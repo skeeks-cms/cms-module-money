@@ -33,11 +33,15 @@ class m150120_100558_create_table__money_currency extends Migration
             'status'                => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10', //статус, активна некативна, удалено
 
             'name'                  => Schema::TYPE_STRING . '(255) NULL', //статус, активна некативна, удалено
+            'name_full'             => Schema::TYPE_STRING . '(255) NULL', //статус, активна некативна, удалено
+            'course'                => Schema::TYPE_STRING . '(255) NULL', //статус, активна некативна, удалено
 
         ], $tableOptions);
 
         $this->execute("ALTER TABLE {{%money_currency}} ADD UNIQUE(code);");
         $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(status);");
+        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(course);");
+        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(name_full);");
         $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(name);");
 
         $this->execute("ALTER TABLE {{%money_currency}} COMMENT = 'Валюты';");

@@ -17,14 +17,15 @@ return [
             [
                 'money' =>
                 [
-                    'label'     => 'Валюты/деньги',
+                    'label'     => 'Валюты и деньги',
                     'priority'  => 0,
 
                     'items' =>
                     [
                         [
-                            "label" => "Валюта",
-                            "url"   => ["money/admin-currency"]
+                            "label"     => "Список валют",
+                            "url"       => ["money/admin-currency"],
+                            "img"       => [\skeeks\modules\cms\money\assets\Asset::className(), 'images/money_16_16.png']
                         ],
                     ]
                 ]

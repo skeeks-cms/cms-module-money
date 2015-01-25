@@ -47,7 +47,7 @@ class Currency extends ActiveRecord
         return array_merge(parent::rules(), [
             [['code'], 'required'],
             [['code'], 'unique'],
-            [['status', 'course', 'name'], 'safe'],
+            [['status', 'course', 'name', 'name_full'], 'safe'],
         ]);
     }
 

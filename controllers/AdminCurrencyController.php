@@ -9,7 +9,10 @@
  * @since 1.0.0
  */
 namespace skeeks\modules\cms\money\controllers;
+use skeeks\cms\models\behaviors\HasStatus;
 use skeeks\cms\modules\admin\controllers\AdminModelEditorSmartController;
+use skeeks\cms\modules\admin\controllers\helpers\rules\NoModel;
+use skeeks\modules\cms\money\ExchangeRatesCBRF;
 use skeeks\modules\cms\money\models\Currency;
 use yii\helpers\ArrayHelper;
 
@@ -43,35 +46,93 @@ class AdminCurrencyController extends AdminModelEditorSmartController
                 [
                     "actions" =>
                         [
-                            /*'parse' =>
-                                [
-                                    "label" => "Обновить города и регионы",
-                                    "icon" => "glyphicon glyphicon-paperclip",
-                                    "rules" =>
+                            'update-all' =>
+                            [
+                                "label" => "Обновить все валюты",
+                                "icon" => "glyphicon glyphicon-paperclip",
+                                "rules" =>
+                                    [
                                         [
-                                            [
-                                                "class" => NoModel::className(),
-                                            ]
+                                            "class" => NoModel::className(),
                                         ]
-                                ],*/
+                                    ]
+                            ],
+
+                            'update-course' =>
+                            [
+                                "label" => "Обновить курс",
+                                "icon" => "glyphicon glyphicon-paperclip",
+                                "rules" =>
+                                    [
+                                        [
+                                            "class" => NoModel::className(),
+                                        ]
+                                    ]
+                            ],
                         ]
                 ]
         ]);
     }
 
-    public function actionParse()
+    public function actionUpdateAll()
     {
         if (\Yii::$app->request->isPost)
         {
-            if ($id = \Yii::$app->request->post('kladr_country_id'))
+            foreach (\skeeks\modules\cms\money\Currency::$currencies as $code => $data)
             {
-                Updater::cityUpdate($id);
-            } else
-            {
-                Updater::cityUpdate();
+                $currency = new \skeeks\modules\cms\money\Currency($code);
+
+                if (!$currencyModel = Currency::find()->where(['code' => $code])->one())
+                {
+                    $currencyModel = new Currency([
+                        'code' => $code,
+                        'status' => HasStatus::STATUS_INACTIVE,
+                        'name_full' => $currency->getDisplayName(),
+                        'name' => $currency->getDisplayName(),
+                    ]);
+
+                    $currencyModel->save(false);
+                } else
+                {
+                    if (!$currencyModel->name)
+                    {
+                        $currencyModel->name        = $currency->getDisplayName();
+                    }
+
+                    if (!$currencyModel->name_full)
+                    {
+                        $currencyModel->name_full        = $currency->getDisplayName();
+                    }
+                    $currencyModel->save(false);
+                }
             }
+
         }
 
-        return $this->render('parse');
+        return $this->render('update-all');
+    }
+
+    public function actionUpdateCourse()
+    {
+        if (\Yii::$app->request->isPost)
+        {
+            $cbrf = new ExchangeRatesCBRF();
+            $data = $cbrf->GetRates();
+
+            if ($data['byChCode'])
+            {
+                foreach ($data['byChCode'] as $code => $value)
+                {
+                    if ($currency = Currency::find()->where(['code' => $code])->one())
+                    {
+                        $currency->course = $value;
+                        $currency->save(false);
+                    }
+                }
+            }
+
+        }
+
+        return $this->render('update-course');
     }
 }
