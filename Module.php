@@ -14,11 +14,13 @@ use skeeks\cms\base\Module as CmsModule;
 
 /**
  * Class Module
- * @package skeeks\modules\cms\kladr
+ * @package skeeks\modules\cms\money
  */
 class Module extends CmsModule
 {
-    public $controllerNamespace = 'skeeks\modules\cms\kladr\controllers';
+    public $controllerNamespace = 'skeeks\modules\cms\money\controllers';
+
+    public $sourceCurrency = 'RUB';
 
     /**
      * @return array
