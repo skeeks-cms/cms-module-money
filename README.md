@@ -24,7 +24,7 @@ $money3 = Money::fromString('12', "EUR");
 $money = $money->add($money2);
 $money = $money->add($money3);
 
-$money->convertToCurrency('GBP');
+$money = $money->convertToCurrency('GBP');
 
 $formatter = new IntlFormatter('de_DE');
 $formatter->format($money); //результат 132,25 £
