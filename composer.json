@@ -22,8 +22,7 @@
         "skeeks/cms": "*",
         "ext-intl": "*",
         "ext-soap": "*",
-        "ext-simplexml": "*",
-        "sebastian/money": "1.5.*"
+        "ext-simplexml": "*"
     },
     "autoload": {
         "psr-4": {
