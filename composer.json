@@ -20,6 +20,9 @@
     "minimum-stability": "dev",
     "require": {
         "skeeks/cms": "*",
+        "ext-intl": "*",
+        "ext-soap": "*",
+        "ext-simplexml": "*",
         "sebastian/money": "1.5.*"
     },
     "autoload": {
