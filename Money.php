@@ -28,7 +28,7 @@ use skeeks\modules\cms\money\exceptions\OverflowException;
 class Money
 {
     /**
-     * @var integer
+     * @var float
      */
     private $amount;
 
@@ -48,14 +48,20 @@ class Money
     );
 
     /**
-     * @param  integer                                  $amount
+     * @param  integer|float                                  $amount
      * @param  Currency|string $currency
      * @throws InvalidArgumentException
      */
     public function __construct($amount, $currency)
     {
-        if (!is_int($amount)) {
-            throw new InvalidArgumentException('$amount must be an integer');
+        if (is_int($amount))
+        {
+            $amount = (float) $amount;
+        }
+
+        if (!is_float($amount))
+        {
+            throw new InvalidArgumentException('$amount must be an integer or float');
         }
 
         $this->amount   = $amount;
@@ -86,7 +92,8 @@ class Money
         $currency = Currency::getInstance($currency);
 
         return new static(
-            intval(
+            //intval(
+            floatval(
                 round(
                     $currency->getSubUnit() *
                     round(
@@ -105,7 +112,7 @@ class Money
     /**
      * Returns the monetary value represented by this object.
      *
-     * @return integer
+     * @return float
      */
     public function getAmount()
     {
@@ -139,7 +146,7 @@ class Money
 
         $value = $this->amount + $other->getAmount();
 
-        $this->assertIsInteger($value);
+        $this->assertIsFloat($value);
 
         return $this->newMoney($value);
     }
@@ -160,7 +167,7 @@ class Money
 
         $value = $this->amount - $other->getAmount();
 
-        $this->assertIsInteger($value);
+        $this->assertIsFloat($value);
 
         return $this->newMoney($value);
     }
@@ -194,7 +201,7 @@ class Money
         }
 
         return $this->newMoney(
-            $this->castToInt(
+            $this->castToFloat(
                 round($factor * $this->amount, 0, $roundingMode)
             )
         );
@@ -204,17 +211,22 @@ class Money
      * Allocate the monetary value represented by this Money object
      * among N targets.
      *
-     * @param  integer $n
+     * @param  integer|float $n
      * @return Money[]
      * @throws InvalidArgumentException
      */
     public function allocateToTargets($n)
     {
-        if (!is_int($n)) {
+        if (is_int($n))
+        {
+            $n = (float) $n;
+        }
+
+        if (!is_float($n)) {
             throw new InvalidArgumentException('$n must be an integer');
         }
 
-        $low       = $this->newMoney(intval($this->amount / $n));
+        $low       = $this->newMoney(floatval($this->amount / $n));
         $high      = $this->newMoney($low->getAmount() + 1);
         $remainder = $this->amount % $n;
         $result    = array();
@@ -245,7 +257,7 @@ class Money
         $remainder = $this->amount;
 
         for ($i = 0; $i < count($ratios); $i++) {
-            $amount     = $this->castToInt($this->amount * $ratios[$i] / $total);
+            $amount     = $this->castToFloat($this->amount * $ratios[$i] / $total);
             $result[]   = $this->newMoney($amount);
             $remainder -= $amount;
         }
@@ -275,7 +287,7 @@ class Money
     public function extractPercentage($percentage)
     {
         $percentage = $this->newMoney(
-            intval($this->amount / (100 + $percentage) * $percentage)
+            floatval($this->amount / (100 + $percentage) * $percentage)
         );
 
         return array(
@@ -390,9 +402,9 @@ class Money
      * @return number
      * @throws OverflowException
      */
-    private function assertIsInteger($amount)
+    private function assertIsFloat($amount)
     {
-        if (!is_int($amount)) {
+        if (!is_float($amount)) {
             throw new OverflowException;
         }
     }// @codeCoverageIgnore
@@ -415,18 +427,19 @@ class Money
      * Cast an amount to an integer but ensure that the operation won't hide overflow
      *
      * @param number $amount
-     * @return int
+     * @return float
      * @throws OverflowException
      */
-    private function castToInt($amount)
+    private function castToFloat($amount)
     {
         $this->assertInsideIntegerBounds($amount);
 
-        return intval($amount);
+        return floatval($amount);
+        //return intval($amount);
     }
 
     /**
-     * @param  integer $amount
+     * @param  integer|float $amount
      * @return Money
      */
     private function newMoney($amount)
