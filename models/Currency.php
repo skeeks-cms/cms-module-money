@@ -47,8 +47,19 @@ class Currency extends ActiveRecord
         return array_merge(parent::rules(), [
             [['code'], 'required'],
             [['code'], 'unique'],
+            [['code'], 'validateCode'],
             [['status', 'course', 'name', 'name_full'], 'safe'],
         ]);
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+
+        $scenarios['create'] = ['name', 'code', 'course', 'name_full'];
+        $scenarios['update'] = ['name', 'code', 'course', 'name_full'];
+
+        return $scenarios;
     }
 
 
@@ -58,12 +69,22 @@ class Currency extends ActiveRecord
     public function attributeLabels()
     {
         return  array_merge(parent::attributeLabels(), [
-            'id'        => \Yii::t('app', 'ID'),
-            'code'      => \Yii::t('app', 'Code'),
-            'status'    => \Yii::t('app', 'Status'),
-            'course'    => \Yii::t('app', 'Course'),
-            'name'      => \Yii::t('app', 'Name'),
+            'id'            => \Yii::t('app', 'ID'),
+            'code'          => "Код",
+            'status'        => "Статус",
+            'course'        => "Курс",
+            'name'          => "Название",
+            'name_full'     => "Полное название",
         ]);
+    }
+
+
+    public function validateCode($attribute)
+    {
+        if(!preg_match('/^[A-Z]{3}$/', $this->$attribute))
+        {
+            $this->addError($attribute, 'Используйте только буквы в верхнем регистре. Пример RUB (3 символа)');
+        }
     }
 
 }

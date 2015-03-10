@@ -29,6 +29,9 @@ class AdminCurrencyController extends AdminModelEditorSmartController
         $this->_modelShowAttribute      = "code";
         $this->_modelClassName          = Currency::className();
 
+        $this->enableScenarios = true;
+        $this->modelValidate = true;
+
         parent::init();
 
 
