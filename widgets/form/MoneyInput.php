@@ -29,7 +29,7 @@ class MoneyInput extends InputWidget
     public $fieldNameAmmount        = 'ammount';
     public $fieldNameCurrency       = 'currency';
 
-    public $name                    = 'Цена';
+    public $name                    = '';
 
     private function _initAndValidate()
     {

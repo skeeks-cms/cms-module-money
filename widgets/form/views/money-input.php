@@ -21,13 +21,11 @@ $clientOptionsJson = \yii\helpers\Json::encode($clientOptions);
 ?>
 <div id="<?= $id; ?>" class="sx-widget-form-elements-money">
     <div class="row">
-        <div class="col-lg-4">
-            <label><?= $widget->name; ?>:</label>
+        <div class="col-lg-3">
             <?= \yii\helpers\Html::activeTextInput($model, $widget->fieldNameAmmount, ['class' => 'form-control']); ?>
         </div>
 
-        <div class="col-lg-4">
-            <label></label>
+        <div class="col-lg-1">
             <? echo \skeeks\widget\chosen\Chosen::widget([
                     'model'     => $model,
                     'attribute' => $widget->fieldNameCurrency,

@@ -14,6 +14,10 @@ use skeeks\cms\modules\admin\widgets\GridView;
 /* @var $searchModel common\models\searchs\Game */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+$dataProvider->sort->defaultOrder = [
+    'status' => SORT_ASC
+];
+
 ?>
 
 <?= GridView::widget([
