@@ -11,12 +11,14 @@ return [
         'label'     => 'Валюты и деньги',
         'priority'  => 0,
 
+        "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png'],
+
         'items' =>
         [
             [
                 "label"     => "Список валют",
                 "url"       => ["money/admin-currency"],
-                "img"       => [\skeeks\modules\cms\money\assets\Asset::className(), 'images/money_16_16.png']
+                "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png']
             ],
         ]
     ]
