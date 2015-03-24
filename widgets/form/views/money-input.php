@@ -27,6 +27,7 @@ $clientOptionsJson = \yii\helpers\Json::encode($clientOptions);
 
         <div class="col-lg-1">
             <? echo \skeeks\widget\chosen\Chosen::widget([
+                    'allowDeselect'     => false,
                     'model'     => $model,
                     'attribute' => $widget->fieldNameCurrency,
                     'items'     => \yii\helpers\ArrayHelper::map(
