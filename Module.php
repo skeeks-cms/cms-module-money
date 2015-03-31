@@ -28,8 +28,8 @@ class Module extends CmsModule
     protected function _descriptor()
     {
         return array_merge(parent::_descriptor(), [
-            "name"          => "Модуль для работы с деньгами и валютой",
-            "description"   => "Модуль для работы с деньгами и валютой",
+            "version"           => "1.0.6",
+            "name"              => "Модуль для работы с деньгами и валютой",
         ]);
     }
 
