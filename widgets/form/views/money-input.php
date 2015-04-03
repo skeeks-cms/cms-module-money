@@ -29,9 +29,10 @@ $clientOptionsJson = \yii\helpers\Json::encode($clientOptions);
             <? echo \skeeks\widget\chosen\Chosen::widget([
                     'allowDeselect'     => false,
                     'model'     => $model,
+                    'allowDeselect'     => false,
                     'attribute' => $widget->fieldNameCurrency,
                     'items'     => \yii\helpers\ArrayHelper::map(
-                        \skeeks\modules\cms\money\models\Currency::find()->where(['status' => \skeeks\cms\models\behaviors\HasStatus::STATUS_ACTIVE])->all(),
+                        \Yii::$app->money->getActiveCurrency(),
                         'code', 'code'
                     )
                 ]);

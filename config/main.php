@@ -10,10 +10,17 @@
  */
 return [
 
+    'components' =>
+    [
+        'money' => [
+            'class'         => 'skeeks\modules\cms\money\components\money\Money',
+        ]
+    ],
+
     'modules' =>
     [
         'money' => [
-            'class'         => \skeeks\modules\cms\money\Module::className(),
+            'class'         => 'skeeks\modules\cms\money\Module',
         ]
     ]
 ];
