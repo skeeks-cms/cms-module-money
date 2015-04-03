@@ -20,15 +20,13 @@ class Module extends CmsModule
 {
     public $controllerNamespace = 'skeeks\modules\cms\money\controllers';
 
-    public $sourceCurrency = 'RUB';
-
     /**
      * @return array
      */
     protected function _descriptor()
     {
         return array_merge(parent::_descriptor(), [
-            "version"           => "1.0.6",
+            "version"           => "1.0.7",
             "name"              => "Модуль для работы с деньгами и валютой",
         ]);
     }

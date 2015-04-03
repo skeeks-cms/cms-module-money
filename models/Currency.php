@@ -14,6 +14,7 @@ namespace skeeks\modules\cms\money\models;
 use skeeks\cms\base\db\ActiveRecord;
 use skeeks\cms\models\behaviors\HasDescriptionsBehavior;
 use skeeks\cms\models\behaviors\HasStatus;
+use skeeks\cms\models\behaviors\HasStatusBoolean;
 
 /**
  * Class Currency
@@ -34,9 +35,7 @@ class Currency extends ActiveRecord
      */
     public function behaviors()
     {
-        return array_merge(parent::behaviors(), [
-            HasStatus::className() => HasStatus::className(),
-        ]);
+        return array_merge(parent::behaviors(), []);
     }
 
     /**
@@ -48,6 +47,7 @@ class Currency extends ActiveRecord
             [['code'], 'required'],
             [['code'], 'unique'],
             [['code'], 'validateCode'],
+            [['priority'], 'integer'],
             [['status', 'course', 'name', 'name_full'], 'safe'],
         ]);
     }
@@ -56,8 +56,8 @@ class Currency extends ActiveRecord
     {
         $scenarios = parent::scenarios();
 
-        $scenarios['create'] = ['name', 'code', 'course', 'name_full'];
-        $scenarios['update'] = ['name', 'code', 'course', 'name_full'];
+        $scenarios['create'] = $scenarios[self::SCENARIO_DEFAULT];
+        $scenarios['update'] = $scenarios[self::SCENARIO_DEFAULT];
 
         return $scenarios;
     }
@@ -70,11 +70,12 @@ class Currency extends ActiveRecord
     {
         return  array_merge(parent::attributeLabels(), [
             'id'            => \Yii::t('app', 'ID'),
-            'code'          => "Код",
+            'code'          => "Валюта",
             'status'        => "Статус",
             'course'        => "Курс",
             'name'          => "Название",
             'name_full'     => "Полное название",
+            'priority'      => \Yii::t('app', 'Priority'),
         ]);
     }
 
