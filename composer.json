@@ -20,9 +20,6 @@
     "minimum-stability": "dev",
     "require": {
         "skeeks/cms": "*",
-        "ext-intl": "*",
-        "ext-soap": "*",
-        "ext-simplexml": "*"
     },
     "autoload": {
         "psr-4": {
