@@ -19,7 +19,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "skeeks/cms": "*"
+        "skeeks/cms": ">=2.*"
     },
     "autoload": {
         "psr-4": {

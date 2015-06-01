@@ -24,17 +24,12 @@ class AdminCurrencyController extends AdminModelEditorSmartController
 {
     public function init()
     {
-        $this->_label                   = "Управление валютами";
+        $this->name                   = "Управление валютами";
 
-        $this->_modelShowAttribute      = "code";
-        $this->_modelClassName          = Currency::className();
-
-        $this->enableScenarios = true;
-        $this->modelValidate = true;
+        $this->modelShowAttribute      = "code";
+        $this->modelClassName          = Currency::className();
 
         parent::init();
-
-
     }
 
 
