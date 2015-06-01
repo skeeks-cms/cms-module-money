@@ -48,20 +48,10 @@ class Currency extends ActiveRecord
             [['code'], 'unique'],
             [['code'], 'validateCode'],
             [['priority'], 'integer'],
-            [['status', 'course', 'name', 'name_full'], 'safe'],
+            [['active'], 'string'],
+            [['course', 'name', 'name_full'], 'safe'],
         ]);
     }
-
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-
-        $scenarios['create'] = $scenarios[self::SCENARIO_DEFAULT];
-        $scenarios['update'] = $scenarios[self::SCENARIO_DEFAULT];
-
-        return $scenarios;
-    }
-
 
     /**
      * @inheritdoc
@@ -71,7 +61,7 @@ class Currency extends ActiveRecord
         return  array_merge(parent::attributeLabels(), [
             'id'            => \Yii::t('app', 'ID'),
             'code'          => "Валюта",
-            'status'        => "Статус",
+            'active'        => \Yii::t('app', 'Active'),
             'course'        => "Курс",
             'name'          => "Название",
             'name_full'     => "Полное название",

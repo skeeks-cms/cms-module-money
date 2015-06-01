@@ -15,8 +15,8 @@ use skeeks\cms\modules\admin\widgets\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $dataProvider->sort->defaultOrder = [
-    'status' => SORT_DESC,
-    'priority' => SORT_DESC
+    'active'    => SORT_DESC,
+    'priority'  => SORT_DESC
 ];
 
 ?>
@@ -41,7 +41,7 @@ $dataProvider->sort->defaultOrder = [
         'priority',
         [
             'class' => \skeeks\cms\grid\BooleanColumn::className(),
-            'attribute' => 'status'
+            'attribute' => 'active'
         ],
 
         //['class' => \skeeks\cms\grid\UpdatedAtColumn::className()],

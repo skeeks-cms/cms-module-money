@@ -6,7 +6,7 @@
  * @date 27.03.2015
  */
 use yii\helpers\Html;
-use skeeks\cms\widgets\base\hasModelsSmart\ActiveForm;
+use skeeks\cms\modules\admin\widgets\form\ActiveFormUseTab as ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model \skeeks\cms\models\WidgetConfig */
 ?>
@@ -15,15 +15,11 @@ use skeeks\cms\widgets\base\hasModelsSmart\ActiveForm;
 
 <?= $form->fieldSet('Основное'); ?>
 
-    <?= $form->field($model, 'defaultCurrency')->widget(
-    \skeeks\widget\chosen\Chosen::className(),
-    [
-            'allowDeselect'     => false,
-            'items'     => \yii\helpers\ArrayHelper::map(
-                \Yii::$app->money->getActiveCurrency(),
-                'code', 'code'
-            )
-    ]); ?>
+    <?= $form->fieldSelect($model, 'currencyCode', \yii\helpers\ArrayHelper::map(
+        \skeeks\modules\cms\money\models\Currency::find()->active()->all(),
+        'code',
+        'name'
+    )); ?>
 <?= $form->fieldSetEnd(); ?>
 
 <?= $form->buttonsCreateOrUpdate($model); ?>
