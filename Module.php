@@ -23,10 +23,10 @@ class Module extends CmsModule
     /**
      * @return array
      */
-    protected function _descriptor()
+    static public function descriptorConfig()
     {
-        return array_merge(parent::_descriptor(), [
-            "version"           => "2.0.0",
+        return array_merge(parent::descriptorConfig(), [
+            "version"           => "2.0.1",
             "name"              => "Модуль для работы с деньгами и валютой",
         ]);
     }
