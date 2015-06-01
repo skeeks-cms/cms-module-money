@@ -9,7 +9,10 @@
  * @since 1.0.0
  */
 namespace skeeks\modules\cms\money\controllers;
+use skeeks\cms\components\Cms;
 use skeeks\cms\models\behaviors\HasStatus;
+use skeeks\cms\modules\admin\actions\AdminAction;
+use skeeks\cms\modules\admin\controllers\AdminModelEditorController;
 use skeeks\cms\modules\admin\controllers\AdminModelEditorSmartController;
 use skeeks\cms\modules\admin\controllers\helpers\rules\NoModel;
 use skeeks\modules\cms\money\ExchangeRatesCBRF;
@@ -20,62 +23,42 @@ use yii\helpers\ArrayHelper;
  * Class AdminCurrencyController
  * @package skeeks\modules\cms\money\controllers
  */
-class AdminCurrencyController extends AdminModelEditorSmartController
+class AdminCurrencyController extends AdminModelEditorController
 {
     public function init()
     {
-        $this->_label                   = "Управление валютами";
+        $this->name                   = "Управление валютами";
 
-        $this->_modelShowAttribute      = "code";
-        $this->_modelClassName          = Currency::className();
-
-        $this->enableScenarios = true;
-        $this->modelValidate = true;
+        $this->modelShowAttribute      = "code";
+        $this->modelClassName          = Currency::className();
 
         parent::init();
-
-
     }
 
-
-    /**
-     * @return array
-     */
-    public function behaviors()
+    public function actions()
     {
-        return ArrayHelper::merge(parent::behaviors(), [
+        $actions = ArrayHelper::merge(parent::actions(),
+        [
+            'update-all' =>
+            [
+                "class"         => AdminAction::className(),
+                "name"          => "Обновить все валюты",
+                "icon"          => "glyphicon glyphicon-paperclip",
+                "callback"      => [$this, 'actionUpdateAll'],
+            ],
 
-            self::BEHAVIOR_ACTION_MANAGER =>
-                [
-                    "actions" =>
-                        [
-                            'update-all' =>
-                            [
-                                "label" => "Обновить все валюты",
-                                "icon" => "glyphicon glyphicon-paperclip",
-                                "rules" =>
-                                    [
-                                        [
-                                            "class" => NoModel::className(),
-                                        ]
-                                    ]
-                            ],
-
-                            'update-course' =>
-                            [
-                                "label" => "Обновить курс",
-                                "icon" => "glyphicon glyphicon-paperclip",
-                                "rules" =>
-                                    [
-                                        [
-                                            "class" => NoModel::className(),
-                                        ]
-                                    ]
-                            ],
-                        ]
-                ]
+            'update-course' =>
+            [
+                "class"         => AdminAction::className(),
+                "name"          => "Обновить курс",
+                "icon"          => "glyphicon glyphicon-paperclip",
+                "callback"      => [$this, 'actionUpdateCourse'],
+            ],
         ]);
+
+        return $actions;
     }
+
 
     public function actionUpdateAll()
     {
@@ -89,7 +72,7 @@ class AdminCurrencyController extends AdminModelEditorSmartController
                 {
                     $currencyModel = new Currency([
                         'code' => $code,
-                        'status' => HasStatus::STATUS_INACTIVE,
+                        'active' => Cms::BOOL_N,
                         'name_full' => $currency->getDisplayName(),
                         'name' => $currency->getDisplayName(),
                     ]);

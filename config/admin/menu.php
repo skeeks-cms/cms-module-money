@@ -5,14 +5,10 @@
  * @copyright 2010 SkeekS (СкикС)
  * @date 12.03.2015
  */
-return [
-    'money' =>
+return
+[
+    'cms-settings' =>
     [
-        'label'     => 'Валюты и деньги',
-        'priority'  => 0,
-
-        "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png'],
-
         'items' =>
         [
             [

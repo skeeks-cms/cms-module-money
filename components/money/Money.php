@@ -19,14 +19,9 @@ use yii\helpers\ArrayHelper;
 class Money extends \skeeks\cms\base\Component
 {
     /**
-     * @var string
-     */
-    public $defaultCurrency                     = 'RUB';
-
-    /**
      * @var string текущая валюта
      */
-    public $currency                            = null;
+    public $currencyCode                         = 'RUB';
 
     /**
      *
@@ -34,35 +29,31 @@ class Money extends \skeeks\cms\base\Component
     public function init()
     {
         parent::init();
-
-        if ($this->currency === null)
-        {
-            $this->currency = $this->defaultCurrency;
-        }
     }
+
     /**
      * Можно задать название и описание компонента
      * @return array
      */
-    static public function getDescriptorConfig()
+    static public function descriptorConfig()
     {
-        return
-        [
+        return array_merge(parent::descriptorConfig(), [
             'name'          => 'Валюты и деньги',
-        ];
+        ]);
     }
+
 
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            [['defaultCurrency'], 'string'],
+            [['currencyCode'], 'string'],
         ]);
     }
 
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'defaultCurrency'                => 'Валюта по умолчанию',
+            'currencyCode'                => 'Валюта по умолчанию',
         ]);
     }
 
