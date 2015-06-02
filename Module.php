@@ -26,7 +26,7 @@ class Module extends CmsModule
     static public function descriptorConfig()
     {
         return array_merge(parent::descriptorConfig(), [
-            "version"           => "2.0.1",
+            "version"           => "2.0.2",
             "name"              => "Модуль для работы с деньгами и валютой",
         ]);
     }
