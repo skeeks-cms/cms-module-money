@@ -17,9 +17,8 @@
             "email": "semenov@skeeks.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "skeeks/cms": ">=2.0.0"
+        "skeeks/cms": "~2.0"
     },
     "autoload": {
         "psr-4": {
