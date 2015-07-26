@@ -12,9 +12,11 @@ namespace skeeks\modules\cms\money\controllers;
 use skeeks\cms\components\Cms;
 use skeeks\cms\models\behaviors\HasStatus;
 use skeeks\cms\modules\admin\actions\AdminAction;
+use skeeks\cms\modules\admin\actions\modelEditor\AdminMultiModelEditAction;
 use skeeks\cms\modules\admin\controllers\AdminModelEditorController;
 use skeeks\cms\modules\admin\controllers\AdminModelEditorSmartController;
 use skeeks\cms\modules\admin\controllers\helpers\rules\NoModel;
+use skeeks\cms\modules\admin\traits\AdminModelEditorStandartControllerTrait;
 use skeeks\modules\cms\money\ExchangeRatesCBRF;
 use skeeks\modules\cms\money\models\Currency;
 use yii\helpers\ArrayHelper;
@@ -25,6 +27,8 @@ use yii\helpers\ArrayHelper;
  */
 class AdminCurrencyController extends AdminModelEditorController
 {
+    use AdminModelEditorStandartControllerTrait;
+
     public function init()
     {
         $this->name                   = "Управление валютами";
@@ -54,6 +58,23 @@ class AdminCurrencyController extends AdminModelEditorController
                 "icon"          => "glyphicon glyphicon-paperclip",
                 "callback"      => [$this, 'actionUpdateCourse'],
             ],
+
+
+            "activate-multi" =>
+            [
+                'class' => AdminMultiModelEditAction::className(),
+                "name" => "Активировать",
+                //"icon"              => "glyphicon glyphicon-trash",
+                "eachCallback" => [$this, 'eachMultiActivate'],
+            ],
+
+            "inActivate-multi" =>
+            [
+                'class' => AdminMultiModelEditAction::className(),
+                "name" => "Деактивировать",
+                //"icon"              => "glyphicon glyphicon-trash",
+                "eachCallback" => [$this, 'eachMultiInActivate'],
+            ]
         ]);
 
         return $actions;

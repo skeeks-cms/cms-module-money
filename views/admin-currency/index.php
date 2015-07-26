@@ -13,26 +13,21 @@
 /* @var $searchModel common\models\searchs\Game */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$dataProvider->sort->defaultOrder = [
+/*$dataProvider->sort->defaultOrder = [
     'active'    => SORT_DESC,
     'priority'  => SORT_DESC
-];
+];*/
 
 ?>
 
-<?= \skeeks\cms\modules\admin\widgets\GridViewHasSettings::widget([
+<?= \skeeks\cms\modules\admin\widgets\GridViewStandart::widget([
     'dataProvider'  => $dataProvider,
     'filterModel'   => $searchModel,
+    'adminController'   => $controller,
+    'settingsData'   => [
+        'orderBy' => 'active'
+    ],
     'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-
-        [
-            'class'         => \skeeks\cms\modules\admin\grid\ActionColumn::className(),
-            'controller'    => $controller
-        ],
-
-        ///['class' => \skeeks\cms\grid\ImageColumn::className()],
-
         'code',
         'course',
         'name',
