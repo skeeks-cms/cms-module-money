@@ -7,14 +7,28 @@
  */
 return
 [
-    'cms-settings' =>
+    'other' =>
     [
         'items' =>
         [
             [
-                "label"     => "Список валют",
-                "url"       => ["money/admin-currency"],
-                "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png']
+                "label"     => "Валюты",
+                "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png'],
+
+                'items' =>
+                [
+                    [
+                        "label"     => "Валюты",
+                        "url"       => ["money/admin-currency"],
+                        "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png']
+                    ],
+
+                    [
+                        "label" => "Настройки",
+                        "url"   => ["cms/admin-settings", "component" => 'skeeks\modules\cms\money\components\money\Money'],
+                        "img"       => ['\skeeks\cms\modules\admin\assets\AdminAsset', 'images/icons/settings.png'],
+                    ],
+                ]
             ],
         ]
     ]
