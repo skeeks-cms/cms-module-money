@@ -49,7 +49,8 @@ class Currency extends ActiveRecord
             [['code'], 'validateCode'],
             [['priority'], 'integer'],
             [['active'], 'string'],
-            [['course', 'name', 'name_full'], 'safe'],
+            [['course'], 'number'],
+            [['name', 'name_full'], 'safe'],
         ]);
     }
 
