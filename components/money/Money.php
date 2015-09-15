@@ -13,6 +13,10 @@ use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 /**
+ *
+ * @property Currency                                       $currencyObject
+ * @property \skeeks\modules\cms\money\models\Currency[]    $activeCurrencies
+ *
  * Class Money
  * @package skeeks\modules\cms\money\components\money
  */
@@ -58,44 +62,11 @@ class Money extends \skeeks\cms\base\Component
     }
 
     /**
-     * Поиск активных валют
-     *
-     * @return ActiveQuery
+     * @return array|\yii\db\ActiveRecord[]
      */
-    public function findActiveCurrency()
+    public function getActiveCurrencies()
     {
-        return \skeeks\modules\cms\money\models\Currency::find()->where(['status' => 1]);
-    }
-
-    /**
-     * Поиск активных валют
-     *
-     * @return \skeeks\modules\cms\money\models\Currency[]
-     */
-    public function fetchActiveCurrency()
-    {
-        return $this->findActiveCurrency()->all();
-    }
-
-    /**
-     * @var null \skeeks\modules\cms\money\models\Currency[]
-     */
-    protected $_activeCurrency = null;
-
-    /**
-     * TODO: добавить кэширование
-     * Получить список активных валют, 1 раз за сценарий
-     *
-     * @return \skeeks\modules\cms\money\models\Currency[]
-     */
-    public function getActiveCurrency()
-    {
-        if ($this->_activeCurrency === null)
-        {
-            $this->_activeCurrency = (array) $this->fetchActiveCurrency();
-        }
-
-        return $this->_activeCurrency;
+        return \skeeks\modules\cms\money\models\Currency::find()->active()->all();
     }
 
     /**
@@ -103,9 +74,9 @@ class Money extends \skeeks\cms\base\Component
      *
      * @return Currency
      */
-    public function currency()
+    public function getCurrencyObject()
     {
-        return Currency::getInstance(\Yii::$app->money->currency);
+        return Currency::getInstance(\Yii::$app->money->currencyCode);
     }
 
     /**
@@ -116,7 +87,7 @@ class Money extends \skeeks\cms\base\Component
      */
     public function newMoney($ammount = '0')
     {
-        return \skeeks\modules\cms\money\Money::fromString((string) $ammount, $this->currency);
+        return \skeeks\modules\cms\money\Money::fromString((string) $ammount, $this->currencyCode);
     }
 
     static public $lanquages = [];
