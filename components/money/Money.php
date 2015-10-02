@@ -13,10 +13,6 @@ use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 /**
- *
- * @property Currency                                       $currencyObject
- * @property \skeeks\modules\cms\money\models\Currency[]    $activeCurrencies
- *
  * Class Money
  * @package skeeks\modules\cms\money\components\money
  */
@@ -85,9 +81,13 @@ class Money extends \skeeks\cms\base\Component
      * @param string $ammount
      * @return \skeeks\modules\cms\money\Money
      */
-    public function newMoney($ammount = '0')
+    public function newMoney($ammount = '0', $currency = null)
     {
-        return \skeeks\modules\cms\money\Money::fromString((string) $ammount, $this->currencyCode);
+        if ($currency === null)
+        {
+            $currency = $this->currencyCode;
+        }
+        return \skeeks\modules\cms\money\Money::fromString((string) $ammount, $currency);
     }
 
     static public $lanquages = [];
@@ -114,5 +114,26 @@ class Money extends \skeeks\cms\base\Component
 
         self::$lanquages[$language] = $formatter;
         return $formatter;
+    }
+
+
+    /**
+     * Сконвертировать и отформатировать для текущих настроек
+     *
+     * @param \skeeks\modules\cms\money\Money $money
+     * @param null $language
+     * @param null $currency
+     * @return string
+     */
+    public function convertAndFormat(\skeeks\modules\cms\money\Money $money, $language = null, $currency = null)
+    {
+        if (!$currency)
+        {
+            $currency = $this->currencyCode;
+        }
+
+        $convertedMoney = $money->convertToCurrency($currency);
+
+        return $this->intlFormatter($language)->format($convertedMoney);
     }
 }

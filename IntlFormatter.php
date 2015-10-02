@@ -47,11 +47,18 @@ class IntlFormatter implements Formatter
      * @param  Money $money
      * @return string
      */
-    public function format(Money $money)
+    public function format(Money $money = null)
     {
-        return $this->numberFormatter->formatCurrency(
-            $money->getAmount() / $money->getCurrency()->getSubUnit(),
-            $money->getCurrency()->getCurrencyCode()
-        );
+        if (!$money)
+        {
+            return null;
+        } else
+        {
+            return $this->numberFormatter->formatCurrency(
+                $money->getAmount() / $money->getCurrency()->getSubUnit(),
+                $money->getCurrency()->getCurrencyCode()
+            );
+        }
+
     }
 }
