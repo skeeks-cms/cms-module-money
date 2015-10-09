@@ -109,6 +109,15 @@ class Money
         );
     }
 
+
+    /**
+     * @return float
+     */
+    public function getValue()
+    {
+        return $this->getAmount() / $this->getCurrency()->getSubUnit();
+    }
+
     /**
      * Returns the monetary value represented by this object.
      *
