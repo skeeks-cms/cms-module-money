@@ -123,20 +123,8 @@ class AdminCurrencyController extends AdminModelEditorController
     {
         if (\Yii::$app->request->isPost)
         {
-            $cbrf = new ExchangeRatesCBRF();
-            $data = $cbrf->GetRates();
-
-            if ($data['byChCode'])
-            {
-                foreach ($data['byChCode'] as $code => $value)
-                {
-                    if ($currency = Currency::find()->where(['code' => $code])->one())
-                    {
-                        $currency->course = $value;
-                        $currency->save(false);
-                    }
-                }
-            }
+            \Yii::$app->money->processUpdateCourses();
+            \Yii::$app->session->setFlash('success', 'Данные успешно обновлены');
 
         }
 

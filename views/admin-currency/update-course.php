@@ -19,5 +19,5 @@ use yii\grid\GridView;
     'method' => 'post'
 ]); ?>
 <p>Получить данные из Центрального банка россии</p>
-<button class="btn-primary">Получить данные</button>
+<button class="btn btn-primary">Получить данные</button>
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::end(); ?>

@@ -26,7 +26,6 @@ class Module extends CmsModule
     static public function descriptorConfig()
     {
         return array_merge(parent::descriptorConfig(), [
-            "version"           => file_get_contents(__DIR__ . "/VERSION"),
             "name"              => "Валюты/Деньги",
         ]);
     }

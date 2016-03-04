@@ -6,9 +6,14 @@
  * @date 02.04.2015
  */
 namespace skeeks\modules\cms\money\components\money;
+use skeeks\cms\components\Cms;
 use skeeks\cms\helpers\UrlHelper;
+use skeeks\cms\models\CmsAgent;
 use skeeks\modules\cms\money\Currency;
+use skeeks\modules\cms\money\ExchangeRatesCBRF;
 use skeeks\modules\cms\shop\components\Cart;
+use yii\base\Event;
+use yii\console\Application;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
@@ -24,11 +29,32 @@ class Money extends \skeeks\cms\base\Component
     public $currencyCode                         = 'RUB';
 
     /**
-     *
+     * @var float Наценка в момент обновления
      */
+    public $markupOnUpdate                       = 0;
+
     public function init()
     {
         parent::init();
+
+        if (\Yii::$app instanceof Application)
+        {
+            \Yii::$app->on(Cms::EVENT_AFTER_UPDATE, function(Event $e)
+            {
+                //Вставка агентов
+                if (!CmsAgent::find()->where(['name' => 'money/agents/update-courses'])->one())
+                {
+                    ( new CmsAgent([
+                        'name'              => 'money/agents/update-courses',
+                        'description'       => 'Обновление курса валют',
+                        'agent_interval'    => 3600*12, //раз в 12 часов
+                        'next_exec_at'      => \Yii::$app->formatter->asTimestamp(time()) + 3600*12,
+                        'is_period'         => Cms::BOOL_N
+                    ]) )->save();
+                }
+
+            });
+        }
     }
 
     /**
@@ -47,6 +73,7 @@ class Money extends \skeeks\cms\base\Component
     {
         return ArrayHelper::merge(parent::rules(), [
             [['currencyCode'], 'string'],
+            [['markupOnUpdate'], 'number'],
         ]);
     }
 
@@ -54,6 +81,13 @@ class Money extends \skeeks\cms\base\Component
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
             'currencyCode'                => 'Валюта по умолчанию',
+            'markupOnUpdate'              => 'Наценка в момент обновления',
+        ]);
+    }
+    public function attributeHints()
+    {
+        return ArrayHelper::merge(parent::attributeHints(), [
+            'markupOnUpdate'              => 'В процессе обновления данных валюты, к цене будет добавлена данная наценка, указывать в процентах (%)',
         ]);
     }
 
@@ -135,5 +169,36 @@ class Money extends \skeeks\cms\base\Component
         $convertedMoney = $money->convertToCurrency($currency);
 
         return $this->intlFormatter($language)->format($convertedMoney);
+    }
+
+    /**
+     * @return $this
+     */
+    public function processUpdateCourses()
+    {
+        $cbrf = new ExchangeRatesCBRF();
+        $data = $cbrf->GetRates();
+
+        if ($data['byChCode'])
+        {
+            foreach ($data['byChCode'] as $code => $value)
+            {
+                if ($currency = \skeeks\modules\cms\money\models\Currency::find()->where(['code' => $code])->one())
+                {
+                    //TODO: хардкод (
+                    if ($currency->code != "RUB")
+                    {
+                        $currency->course = $value + ($value * $this->markupOnUpdate/100); //+наценка
+                    } else
+                    {
+                        $currency->course = $value; //+наценка
+                    }
+
+                    $currency->save(false);
+                }
+            }
+        }
+
+        return $this;
     }
 }

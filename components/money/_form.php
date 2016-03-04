@@ -18,8 +18,15 @@ use skeeks\cms\modules\admin\widgets\form\ActiveFormUseTab as ActiveForm;
     <?= $form->fieldSelect($model, 'currencyCode', \yii\helpers\ArrayHelper::map(
         \skeeks\modules\cms\money\models\Currency::find()->active()->all(),
         'code',
-        'name'
+        function($model)
+        {
+            return "{$model->name} [{$model->code}]";
+        }
     )); ?>
+
+    <?
+        echo $form->field($model, 'markupOnUpdate');
+    ?>
 <?= $form->fieldSetEnd(); ?>
 
 <?= $form->buttonsCreateOrUpdate($model); ?>
