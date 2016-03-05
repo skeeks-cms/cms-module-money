@@ -8,13 +8,10 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
-
 namespace skeeks\modules\cms\money\models;
 
-use skeeks\cms\base\db\ActiveRecord;
-use skeeks\cms\models\behaviors\HasDescriptionsBehavior;
-use skeeks\cms\models\behaviors\HasStatus;
-use skeeks\cms\models\behaviors\HasStatusBoolean;
+use skeeks\cms\query\CmsActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * Class Currency
@@ -28,6 +25,14 @@ class Currency extends ActiveRecord
     public static function tableName()
     {
         return '{{%money_currency}}';
+    }
+
+    /**
+     * @return CmsActiveQuery
+     */
+    public static function find()
+    {
+        return new CmsActiveQuery(get_called_class());
     }
 
     /**
