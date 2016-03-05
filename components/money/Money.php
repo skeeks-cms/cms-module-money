@@ -16,6 +16,7 @@ use yii\base\Event;
 use yii\console\Application;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
+use yii\widgets\ActiveForm;
 
 /**
  * Class Money
@@ -89,6 +90,14 @@ class Money extends \skeeks\cms\base\Component
         return ArrayHelper::merge(parent::attributeHints(), [
             'markupOnUpdate'              => 'В процессе обновления данных валюты, к цене будет добавлена данная наценка, указывать в процентах (%)',
         ]);
+    }
+
+    public function renderConfigForm(ActiveForm $form)
+    {
+        echo \Yii::$app->view->renderFile(__DIR__ . '/_form.php', [
+            'form'  => $form,
+            'model' => $this
+        ], $this);
     }
 
     /**
