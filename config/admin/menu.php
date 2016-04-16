@@ -12,21 +12,21 @@ return
         'items' =>
         [
             [
-                "label"     => "Валюты",
+                "label"     => \Yii::t('skeeks/money', 'Currency'),
                 "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png'],
 
                 'items' =>
                 [
                     [
-                        "label"     => "Валюты",
+                        "label"     => \Yii::t('skeeks/money', 'Currency'),
                         "url"       => ["money/admin-currency"],
                         "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png']
                     ],
 
                     [
-                        "label" => "Настройки",
+                        "label" => \Yii::t('app', 'Settings'),
                         "url"   => ["cms/admin-settings", "component" => 'skeeks\modules\cms\money\components\money\Money'],
-                        "img"       => ['\skeeks\cms\modules\admin\assets\AdminAsset', 'images/icons/settings.png'],
+                        "img"       => ['\skeeks\cms\modules\admin\assets\AdminAsset', 'images/icons/settings-big.png'],
                         "activeCallback"       => function(\skeeks\cms\modules\admin\helpers\AdminMenuItem $adminMenuItem)
                         {
                             return (bool) (\Yii::$app->request->getUrl() == $adminMenuItem->getUrl());

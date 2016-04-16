@@ -14,7 +14,20 @@ return [
     [
         'money' => [
             'class'         => 'skeeks\modules\cms\money\components\money\Money',
-        ]
+        ],
+
+        'i18n' => [
+            'translations' =>
+            [
+                'skeeks/money' => [
+                    'class'             => 'yii\i18n\PhpMessageSource',
+                    'basePath'          => '@skeeks/modules/cms/money/messages',
+                    'fileMap' => [
+                        'skeeks/money' => 'main.php',
+                    ],
+                ]
+            ]
+        ],
     ],
 
     'modules' =>

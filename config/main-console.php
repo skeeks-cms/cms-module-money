@@ -16,7 +16,8 @@ return [
     'modules' =>
     [
         'money' => [
-            'class'         => 'skeeks\modules\cms\money\ConsoleModule',
+            'class'                 => 'skeeks\modules\cms\money\Module',
+            'controllerNamespace'   => 'skeeks\modules\cms\money\console\controllers'
         ]
     ]
 ];
