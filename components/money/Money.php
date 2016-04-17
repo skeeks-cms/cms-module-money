@@ -34,29 +34,6 @@ class Money extends \skeeks\cms\base\Component
      */
     public $markupOnUpdate                       = 0;
 
-    public function init()
-    {
-        parent::init();
-
-        if (\Yii::$app instanceof Application)
-        {
-            \Yii::$app->on(Cms::EVENT_AFTER_UPDATE, function(Event $e)
-            {
-                //Вставка агентов
-                if (!CmsAgent::find()->where(['name' => 'money/agents/update-courses'])->one())
-                {
-                    ( new CmsAgent([
-                        'name'              => 'money/agents/update-courses',
-                        'description'       => 'Обновление курса валют',
-                        'agent_interval'    => 3600*12, //раз в 12 часов
-                        'next_exec_at'      => \Yii::$app->formatter->asTimestamp(time()) + 3600*12,
-                        'is_period'         => Cms::BOOL_N
-                    ]) )->save();
-                }
-
-            });
-        }
-    }
 
     /**
      * Можно задать название и описание компонента

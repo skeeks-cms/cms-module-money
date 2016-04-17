@@ -1,6 +1,10 @@
 Процесс разработки модуля.
 ==============
 
+2.3.0-pre
+-----------------
+  * Removed Cms::TRIGGER_AFTER_UPDATE
+
 2.2.2
 -----------------
   * Adding internationalization
