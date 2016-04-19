@@ -7,13 +7,11 @@
  */
 namespace skeeks\modules\cms\money;
 
-use skeeks\cms\base\Module as CmsModule;
-
 /**
  * Class Module
  * @package skeeks\modules\cms\money
  */
-class Module extends CmsModule
+class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'skeeks\modules\cms\money\controllers';
 }
