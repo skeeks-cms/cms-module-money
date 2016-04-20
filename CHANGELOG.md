@@ -1,8 +1,9 @@
 Процесс разработки модуля.
 ==============
 
-2.3.0-pre
+2.3.0
 -----------------
+  * \yii\base\Module
   * Removed Cms::TRIGGER_AFTER_UPDATE
 
 2.2.2
