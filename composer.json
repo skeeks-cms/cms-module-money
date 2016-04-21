@@ -1,15 +1,13 @@
 {
     "name": "skeeks/cms-module-money",
-    "description": "Модуль для работы с деньгами и валютой",
+    "description": "Module for working with money and currency",
     "keywords": ["module", "cms", "skeeks", "sx", "app", "yii2", "money"],
     "homepage": "http://www.skeeks.com/",
     "type": "yii2-extension",
-    "license": "BSD-3-Clause",
+    "license": "GPL-3.0+",
     "support": {
         "issues": "http://www.skeeks.com/",
-        "wiki": "http://git.skeeks.com/skeeks/cms-module-money/tree/master/docs/guide-ru",
-        "wiki-cms": "http://git.skeeks.com/skeeks/cms/tree/master/docs/guide-ru",
-        "source": "http://git.skeeks.com/skeeks/cms-module-money"
+        "source": "https://github.com/skeeks-cms/cms-module-money"
     },
     "authors": [
         {
