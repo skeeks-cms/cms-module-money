@@ -31,7 +31,7 @@ class AdminCurrencyController extends AdminModelEditorController
 
     public function init()
     {
-        $this->name                   = "Управление валютами";
+        $this->name                   = \Yii::t('skeeks/money',"Currency management");
 
         $this->modelShowAttribute      = "code";
         $this->modelClassName          = Currency::className();
@@ -46,7 +46,7 @@ class AdminCurrencyController extends AdminModelEditorController
             'update-all' =>
             [
                 "class"         => AdminAction::className(),
-                "name"          => "Обновить все валюты",
+                "name"          => \Yii::t('skeeks/money',"Update all currencies"),
                 "icon"          => "glyphicon glyphicon-paperclip",
                 "callback"      => [$this, 'actionUpdateAll'],
             ],
@@ -54,7 +54,7 @@ class AdminCurrencyController extends AdminModelEditorController
             'update-course' =>
             [
                 "class"         => AdminAction::className(),
-                "name"          => "Обновить курс",
+                "name"          => \Yii::t('skeeks/money',"Refresh rate"),
                 "icon"          => "glyphicon glyphicon-paperclip",
                 "callback"      => [$this, 'actionUpdateCourse'],
             ],
@@ -63,7 +63,7 @@ class AdminCurrencyController extends AdminModelEditorController
             "activate-multi" =>
             [
                 'class' => AdminMultiModelEditAction::className(),
-                "name" => "Активировать",
+                "name" => \Yii::t('skeeks/money',"Activate"),
                 //"icon"              => "glyphicon glyphicon-trash",
                 "eachCallback" => [$this, 'eachMultiActivate'],
             ],
@@ -71,7 +71,7 @@ class AdminCurrencyController extends AdminModelEditorController
             "inActivate-multi" =>
             [
                 'class' => AdminMultiModelEditAction::className(),
-                "name" => "Деактивировать",
+                "name" => \Yii::t('skeeks/money',"Deactivate"),
                 //"icon"              => "glyphicon glyphicon-trash",
                 "eachCallback" => [$this, 'eachMultiInActivate'],
             ]
@@ -124,7 +124,7 @@ class AdminCurrencyController extends AdminModelEditorController
         if (\Yii::$app->request->isPost)
         {
             \Yii::$app->money->processUpdateCourses();
-            \Yii::$app->session->setFlash('success', 'Данные успешно обновлены');
+            \Yii::$app->session->setFlash('success', \Yii::t('skeeks/money','Data successfully updated'));
 
         }
 

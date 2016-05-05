@@ -35,7 +35,7 @@ class MoneyInput extends InputWidget
     {
         if (!$this->hasModel())
         {
-            throw new Exception("Этот файл рассчитан только для форм с моделью");
+            throw new Exception(\Yii::t('skeeks/money',"This file is only designed for the model forms"));
         }
     }
 

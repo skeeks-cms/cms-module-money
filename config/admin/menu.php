@@ -24,7 +24,7 @@ return
                     ],
 
                     [
-                        "label" => \Yii::t('app', 'Settings'),
+                        "label" => \Yii::t('skeeks/money', 'Settings'),
                         "url"   => ["cms/admin-settings", "component" => 'skeeks\modules\cms\money\components\money\Money'],
                         "img"       => ['\skeeks\cms\modules\admin\assets\AdminAsset', 'images/icons/settings-big.png'],
                         "activeCallback"       => function(\skeeks\cms\modules\admin\helpers\AdminMenuItem $adminMenuItem)

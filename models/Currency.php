@@ -65,13 +65,13 @@ class Currency extends ActiveRecord
     public function attributeLabels()
     {
         return  array_merge(parent::attributeLabels(), [
-            'id'            => \Yii::t('app', 'ID'),
-            'code'          => "Валюта",
-            'active'        => \Yii::t('app', 'Active'),
-            'course'        => "Курс",
-            'name'          => "Название",
-            'name_full'     => "Полное название",
-            'priority'      => \Yii::t('app', 'Priority'),
+            'id'            => \Yii::t('skeeks/money', 'ID'),
+            'code'          => \Yii::t('skeeks/money', "Currency"),
+            'active'        => \Yii::t('skeeks/money', 'Active'),
+            'course'        => \Yii::t('skeeks/money', "Rate"),
+            'name'          => \Yii::t('skeeks/money', "Name"),
+            'name_full'     => \Yii::t('skeeks/money', "Full name"),
+            'priority'      => \Yii::t('skeeks/money', 'Priority'),
         ]);
     }
 
@@ -80,7 +80,7 @@ class Currency extends ActiveRecord
     {
         if(!preg_match('/^[A-Z]{3}$/', $this->$attribute))
         {
-            $this->addError($attribute, 'Используйте только буквы в верхнем регистре. Пример RUB (3 символа)');
+            $this->addError($attribute, \Yii::t('skeeks/money','Use only uppercase letters. Example RUB (3 characters)'));
         }
     }
 

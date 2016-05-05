@@ -42,7 +42,7 @@ class Money extends \skeeks\cms\base\Component
     static public function descriptorConfig()
     {
         return array_merge(parent::descriptorConfig(), [
-            'name'          => 'Валюты и деньги',
+            'name'          => \Yii::t('skeeks/money','Currency and Money'),
         ]);
     }
 
@@ -58,14 +58,14 @@ class Money extends \skeeks\cms\base\Component
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'currencyCode'                => 'Валюта по умолчанию',
-            'markupOnUpdate'              => 'Наценка в момент обновления',
+            'currencyCode'                => \Yii::t('skeeks/money','Default currency'),
+            'markupOnUpdate'              => \Yii::t('skeeks/money','Mark-up at the time of update'),
         ]);
     }
     public function attributeHints()
     {
         return ArrayHelper::merge(parent::attributeHints(), [
-            'markupOnUpdate'              => 'В процессе обновления данных валюты, к цене будет добавлена данная наценка, указывать в процентах (%)',
+            'markupOnUpdate'              => \Yii::t('skeeks/money','In the process of updating the data currency, this mark-up will be added to price, specify a percentage').' (%)',
         ]);
     }
 

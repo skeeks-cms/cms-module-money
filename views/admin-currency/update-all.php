@@ -18,6 +18,6 @@ use yii\grid\GridView;
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::begin([
     'method' => 'post'
 ]); ?>
-<p>Наполнение базы данных всеми возможными валютами</p>
-<button class="btn-primary">Получить данные</button>
+<p><?=\Yii::t('skeeks/money','Filling database in all possible currencies');?></p>
+<button class="btn-primary"><?=\Yii::t('skeeks/money','Get data');?></button>
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::end(); ?>

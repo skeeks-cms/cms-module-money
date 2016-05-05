@@ -18,6 +18,6 @@ use yii\grid\GridView;
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::begin([
     'method' => 'post'
 ]); ?>
-<p>Получить данные из Центрального банка россии</p>
-<button class="btn btn-primary">Получить данные</button>
+<p><?=\Yii::t('skeeks/money','Get data from the Central Bank of Russia')?></p>
+<button class="btn btn-primary"><?=\Yii::t('skeeks/money','Get data')?></button>
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::end(); ?>

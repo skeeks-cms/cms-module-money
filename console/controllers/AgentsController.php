@@ -20,6 +20,6 @@ class AgentsController extends Controller
     public function actionUpdateCourses()
     {
         \Yii::$app->money->processUpdateCourses();
-        \Yii::info("Exchange rates are updated");
+        \Yii::info(\Yii::t('skeeks/money',"Exchange rates are updated"));
     }
 }

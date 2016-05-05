@@ -11,7 +11,7 @@ use yii\helpers\Html;
 ?>
 
 
-<?= $form->fieldSet(\Yii::t('app', 'Main')); ?>
+<?= $form->fieldSet(\Yii::t('skeeks/money', 'Main')); ?>
 
     <?= $form->fieldSelect($model, 'currencyCode', \yii\helpers\ArrayHelper::map(
         \skeeks\modules\cms\money\models\Currency::find()->active()->all(),

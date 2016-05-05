@@ -205,7 +205,7 @@ class Money
     {
         if (!in_array($roundingMode, self::$roundingModes)) {
             throw new InvalidArgumentException(
-                '$roundingMode must be a valid rounding mode (PHP_ROUND_*)'
+                '$roundingMode '.\Yii::t('skeeks/money','must be a valid rounding mode').' (PHP_ROUND_*)'
             );
         }
 
@@ -232,7 +232,7 @@ class Money
         }
 
         if (!is_float($n)) {
-            throw new InvalidArgumentException('$n must be an integer');
+            throw new InvalidArgumentException('$n '.\Yii::t('skeeks/money','must be an integer'));
         }
 
         $low       = $this->newMoney(floatval($this->amount / $n));
@@ -470,7 +470,7 @@ class Money
             return new static($newMoney->getAmount(), $currencyTo);
         } else
         {
-            throw new InvalidArgumentException('Не удалось получить cross курс для валюты ' . $currencyTo->getCurrencyCode());
+            throw new InvalidArgumentException(\Yii::t('skeeks/money','Unable to get the cross rate for the currency'). ' ' . $currencyTo->getCurrencyCode());
         }
     }
 }
