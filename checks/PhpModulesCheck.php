@@ -17,9 +17,9 @@ class PhpModulesCheck extends \skeeks\cms\checks\PhpModulesCheck
     public function run()
     {
         $arMods = [
-			'soap'                  => "Функции для работы с soap, php-mod-soap",
-			'intl'                  => "Функции для работы с intl, php-mod-intl",
-			'simplexml'             => "Функции для работы с simplexml, php-mod-simplexml",
+			'soap'                  => \Yii::t('skeeks/money','Functions')." soap, php-mod-soap",
+			'intl'                  => \Yii::t('skeeks/money','Functions')." intl, php-mod-intl",
+			'simplexml'             => \Yii::t('skeeks/money','Functions')." simplexml, php-mod-simplexml",
 		];
 
         $strError = '';
