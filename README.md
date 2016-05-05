@@ -1,5 +1,62 @@
-Модуль для SkeekS cms
+Module for working with money and currency
 ===================================
+
+Installation
+------------
+
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+
+Either run
+
+```
+php composer.phar require --prefer-dist skeeks/cms-module-money "*"
+```
+
+or add
+
+```
+"skeeks/cms-module-money": "*"
+```
+
+Configuration app
+----------
+
+```php
+
+'components' =>
+[
+ 'money' => [
+     'class'         => 'skeeks\modules\cms\money\components\money\Money',
+ ],
+ 'i18n' => [
+     'translations' =>
+     [
+         'skeeks/money' => [
+             'class'             => 'yii\i18n\PhpMessageSource',
+             'basePath'          => '@skeeks/modules/cms/money/messages',
+             'fileMap' => [
+                 'skeeks/money' => 'main.php',
+             ],
+         ]
+     ]
+ ],
+],
+'modules' =>
+[
+    'money' => [
+        'class'         => 'skeeks\modules\cms\money\Module',
+    ]
+]
+
+```
+
+##Links
+* [Web site](http://en.cms.skeeks.com)
+* [Web site (rus)](http://cms.skeeks.com)
+* [Author](http://skeeks.com)
+* [ChangeLog](https://github.com/skeeks-cms/cms-module-money/blob/master/CHANGELOG.md)
+
+
 
 Игформация о модуле
 -------------------
