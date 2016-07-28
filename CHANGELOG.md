@@ -1,6 +1,10 @@
 Процесс разработки модуля.
 ==============
 
+2.4.2
+-----------------
+  * Money implements JsonSerializable
+
 2.4.1
 -----------------
   * Added internationalization

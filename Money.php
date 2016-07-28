@@ -25,7 +25,7 @@ use skeeks\modules\cms\money\exceptions\OverflowException;
  * @see        http://martinfowler.com/bliki/ValueObject.html
  * @see        http://martinfowler.com/eaaCatalog/money.html
  */
-class Money
+class Money implements \JsonSerializable
 {
     /**
      * @var float
@@ -126,6 +126,20 @@ class Money
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     *
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * @link   http://php.net/manual/en/jsonserializable.jsonserialize.php
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'amount'   => $this->amount,
+            'currency' => $this->currency->getCurrencyCode()
+        ];
     }
 
     /**
