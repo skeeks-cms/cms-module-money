@@ -25,6 +25,14 @@ return [
                     'fileMap' => [
                         'skeeks/money' => 'main.php',
                     ],
+                ],
+
+                'skeeks/money/meny' => [
+                    'class'             => 'yii\i18n\PhpMessageSource',
+                    'basePath'          => '@skeeks/modules/cms/money/messages',
+                    'fileMap' => [
+                        'skeeks/money/meny' => 'meny.php',
+                    ],
                 ]
             ]
         ],

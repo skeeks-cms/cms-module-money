@@ -28,4 +28,6 @@ return [
     'must be a valid rounding mode' => 'должен быть верный режим округления',
     'must be an integer' => 'должно быть целым числом',
     'Unable to get the cross rate for the currency' => 'Не удалось получить cross курс для валюты',
+    'Finance' => 'Финансы',
+    'Active' => 'Активность',
 ];

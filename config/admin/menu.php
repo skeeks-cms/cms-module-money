@@ -7,18 +7,23 @@
  */
 return
 [
-    'other' =>
+    'finance' =>
     [
+        'label' => \Yii::t('skeeks/money', 'Finance'),
+        "img"       => ['skeeks\modules\cms\money\assets\Asset', 'icons/money-bag.png'],
+        'priority'  => 300,
+
         'items' =>
         [
             [
-                "label"     => \Yii::t('skeeks/money', 'Currency'),
+                "label"     => \Yii::t('skeeks/money/meny', 'Currency'),
                 "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png'],
+                'priority'  => 600,
 
                 'items' =>
                 [
                     [
-                        "label"     => \Yii::t('skeeks/money', 'Currency'),
+                        "label"     => \Yii::t('skeeks/money/meny', 'Currency'),
                         "url"       => ["money/admin-currency"],
                         "img"       => ['\skeeks\modules\cms\money\assets\Asset', 'images/money_16_16.png']
                     ],

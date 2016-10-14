@@ -19,27 +19,30 @@
 ];*/
 
 ?>
+<? $pjax = \skeeks\cms\modules\admin\widgets\Pjax::begin(); ?>
 
-<?= \skeeks\cms\modules\admin\widgets\GridViewStandart::widget([
-    'dataProvider'  => $dataProvider,
-    'filterModel'   => $searchModel,
-    'adminController'   => $controller,
-    'settingsData'   => [
-        'orderBy' => 'active'
-    ],
-    'columns' => [
-        'code',
-        'course',
-        'name',
-        'name_full',
-        'priority',
-        [
-            'class' => \skeeks\cms\grid\BooleanColumn::className(),
-            'attribute' => 'active'
+    <?php echo $this->render('_search', [
+        'searchModel'   => $searchModel,
+        'dataProvider'  => $dataProvider
+    ]); ?>
+
+    <?= \skeeks\cms\modules\admin\widgets\GridViewStandart::widget([
+        'dataProvider'  => $dataProvider,
+        'filterModel'   => $searchModel,
+        'adminController'   => $controller,
+        'settingsData'   => [
+            'orderBy' => 'active'
         ],
+        'columns' => [
+            'code',
+            'course',
+            'name',
+            'priority',
+            [
+                'class' => \skeeks\cms\grid\BooleanColumn::className(),
+                'attribute' => 'active'
+            ],
+        ],
+    ]); ?>
 
-        //['class' => \skeeks\cms\grid\UpdatedAtColumn::className()],
-
-       // ['class' => \skeeks\cms\grid\UpdatedByColumn::className()],
-    ],
-]); ?>
+<? $pjax::end() ?>
