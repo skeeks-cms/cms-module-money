@@ -1,7 +1,7 @@
 Процесс разработки модуля.
 ==============
 
-2.5.0.pre
+2.5.0
 -----------------
   * New menu item
   * Add filters to admin table
