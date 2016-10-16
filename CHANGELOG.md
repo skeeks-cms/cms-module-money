@@ -1,6 +1,11 @@
 Процесс разработки модуля.
 ==============
 
+2.5.0.pre
+-----------------
+  * New menu item
+  * Add filters to admin table
+
 2.4.2
 -----------------
   * Money implements JsonSerializable
