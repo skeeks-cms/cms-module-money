@@ -22,5 +22,11 @@
         "psr-4": {
             "skeeks\\modules\\cms\\money\\": ""
         }
+    },
+    "extra": {
+        "config-plugin": {
+            "web": "config/main.php",
+            "console": "config/main-console.php"
+        }
     }
 }
