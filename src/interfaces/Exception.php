@@ -8,7 +8,9 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\interfaces;
+
 /**
  *
  * Marker interface for exceptions.
@@ -17,4 +19,5 @@ namespace skeeks\modules\cms\money\interfaces;
  * @package skeeks\modules\cms\money\interfaces
  */
 interface Exception
-{}
+{
+}

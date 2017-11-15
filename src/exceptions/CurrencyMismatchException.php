@@ -8,10 +8,13 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\exceptions;
+
 /**
  * Class CurrencyMismatchException
  * @package skeeks\modules\cms\money\exceptions
  */
 class CurrencyMismatchException extends InvalidArgumentException
-{}
+{
+}

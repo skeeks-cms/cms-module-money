@@ -8,6 +8,7 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\models;
 
 use skeeks\cms\query\CmsActiveQuery;
@@ -64,23 +65,23 @@ class MoneyCurrency extends ActiveRecord
      */
     public function attributeLabels()
     {
-        return  array_merge(parent::attributeLabels(), [
-            'id'            => \Yii::t('skeeks/money', 'ID'),
-            'code'          => \Yii::t('skeeks/money', "Currency"),
-            'active'        => \Yii::t('skeeks/money', 'Active'),
-            'course'        => \Yii::t('skeeks/money', "Rate"),
-            'name'          => \Yii::t('skeeks/money', "Name"),
-            'name_full'     => \Yii::t('skeeks/money', "Full name"),
-            'priority'      => \Yii::t('skeeks/money', 'Priority'),
+        return array_merge(parent::attributeLabels(), [
+            'id' => \Yii::t('skeeks/money', 'ID'),
+            'code' => \Yii::t('skeeks/money', "Currency"),
+            'active' => \Yii::t('skeeks/money', 'Active'),
+            'course' => \Yii::t('skeeks/money', "Rate"),
+            'name' => \Yii::t('skeeks/money', "Name"),
+            'name_full' => \Yii::t('skeeks/money', "Full name"),
+            'priority' => \Yii::t('skeeks/money', 'Priority'),
         ]);
     }
 
 
     public function validateCode($attribute)
     {
-        if(!preg_match('/^[A-Z]{3}$/', $this->$attribute))
-        {
-            $this->addError($attribute, \Yii::t('skeeks/money','Use only uppercase letters. Example RUB (3 characters)'));
+        if (!preg_match('/^[A-Z]{3}$/', $this->$attribute)) {
+            $this->addError($attribute,
+                \Yii::t('skeeks/money', 'Use only uppercase letters. Example RUB (3 characters)'));
         }
     }
 

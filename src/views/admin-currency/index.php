@@ -21,28 +21,28 @@
 ?>
 <? $pjax = \skeeks\cms\modules\admin\widgets\Pjax::begin(); ?>
 
-    <?php echo $this->render('_search', [
-        'searchModel'   => $searchModel,
-        'dataProvider'  => $dataProvider
-    ]); ?>
+<?php echo $this->render('_search', [
+    'searchModel' => $searchModel,
+    'dataProvider' => $dataProvider
+]); ?>
 
-    <?= \skeeks\cms\modules\admin\widgets\GridViewStandart::widget([
-        'dataProvider'  => $dataProvider,
-        'filterModel'   => $searchModel,
-        'adminController'   => $controller,
-        'settingsData'   => [
-            'orderBy' => 'active'
+<?= \skeeks\cms\modules\admin\widgets\GridViewStandart::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'adminController' => $controller,
+    'settingsData' => [
+        'orderBy' => 'active'
+    ],
+    'columns' => [
+        'code',
+        'course',
+        'name',
+        'priority',
+        [
+            'class' => \skeeks\cms\grid\BooleanColumn::className(),
+            'attribute' => 'active'
         ],
-        'columns' => [
-            'code',
-            'course',
-            'name',
-            'priority',
-            [
-                'class' => \skeeks\cms\grid\BooleanColumn::className(),
-                'attribute' => 'active'
-            ],
-        ],
-    ]); ?>
+    ],
+]); ?>
 
 <? $pjax::end() ?>

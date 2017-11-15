@@ -3,6 +3,7 @@
 
 3.1.1
 -----------------
+ * Code style
  * Change source dir to src
  * Agents config update
  

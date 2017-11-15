@@ -8,6 +8,7 @@
  * @date 30.10.2014
  * @since 1.0.0
  */
+
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -18,6 +19,6 @@ use yii\grid\GridView;
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::begin([
     'method' => 'post'
 ]); ?>
-<p><?=\Yii::t('skeeks/money','Filling database in all possible currencies');?></p>
-<button class="btn-primary"><?=\Yii::t('skeeks/money','Get data');?></button>
+    <p><?= \Yii::t('skeeks/money', 'Filling database in all possible currencies'); ?></p>
+    <button class="btn-primary"><?= \Yii::t('skeeks/money', 'Get data'); ?></button>
 <? \skeeks\cms\modules\admin\widgets\ActiveForm::end(); ?>

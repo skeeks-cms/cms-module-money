@@ -11,37 +11,37 @@
 return [
 
     'components' =>
-    [
-        'money' => [
-            'class'         => 'skeeks\modules\cms\money\components\money\Money',
-        ],
+        [
+            'money' => [
+                'class' => 'skeeks\modules\cms\money\components\money\Money',
+            ],
 
-        'i18n' => [
-            'translations' =>
-            [
-                'skeeks/money' => [
-                    'class'             => 'yii\i18n\PhpMessageSource',
-                    'basePath'          => '@skeeks/modules/cms/money/messages',
-                    'fileMap' => [
-                        'skeeks/money' => 'main.php',
-                    ],
-                ],
+            'i18n' => [
+                'translations' =>
+                    [
+                        'skeeks/money' => [
+                            'class' => 'yii\i18n\PhpMessageSource',
+                            'basePath' => '@skeeks/modules/cms/money/messages',
+                            'fileMap' => [
+                                'skeeks/money' => 'main.php',
+                            ],
+                        ],
 
-                'skeeks/money/meny' => [
-                    'class'             => 'yii\i18n\PhpMessageSource',
-                    'basePath'          => '@skeeks/modules/cms/money/messages',
-                    'fileMap' => [
-                        'skeeks/money/meny' => 'meny.php',
-                    ],
-                ]
-            ]
+                        'skeeks/money/meny' => [
+                            'class' => 'yii\i18n\PhpMessageSource',
+                            'basePath' => '@skeeks/modules/cms/money/messages',
+                            'fileMap' => [
+                                'skeeks/money/meny' => 'meny.php',
+                            ],
+                        ]
+                    ]
+            ],
         ],
-    ],
 
     'modules' =>
-    [
-        'money' => [
-            'class'         => 'skeeks\modules\cms\money\Module',
+        [
+            'money' => [
+                'class' => 'skeeks\modules\cms\money\Module',
+            ]
         ]
-    ]
 ];

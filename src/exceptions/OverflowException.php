@@ -8,7 +8,9 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\exceptions;
+
 use skeeks\modules\cms\money\interfaces\Exception;
 
 /**
@@ -19,4 +21,5 @@ use skeeks\modules\cms\money\interfaces\Exception;
  * @package skeeks\modules\cms\money\exceptions
  */
 class OverflowException extends \OverflowException implements Exception
-{}
+{
+}

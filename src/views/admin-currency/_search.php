@@ -22,8 +22,7 @@ $filter->addRule('id', 'integer');
 
 $filter->load(\Yii::$app->request->get());
 
-if ($filter->id)
-{
+if ($filter->id) {
     $query->andWhere(['id' => $filter->id]);
 }
 
@@ -33,6 +32,6 @@ if ($filter->id)
     'action' => '/' . \Yii::$app->request->pathInfo,
 ]); ?>
 
-    <?= $form->field($filter, 'id')->label('ID')->setVisible(); ?>
+<?= $form->field($filter, 'id')->label('ID')->setVisible(); ?>
 
 <? $form::end(); ?>

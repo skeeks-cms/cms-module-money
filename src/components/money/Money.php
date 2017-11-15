@@ -5,7 +5,9 @@
  * @copyright 2010 SkeekS (СкикС)
  * @date 02.04.2015
  */
+
 namespace skeeks\modules\cms\money\components\money;
+
 use skeeks\cms\components\Cms;
 use skeeks\cms\helpers\UrlHelper;
 use skeeks\cms\models\CmsAgent;
@@ -27,12 +29,12 @@ class Money extends \skeeks\cms\base\Component
     /**
      * @var string текущая валюта
      */
-    public $currencyCode                         = 'RUB';
+    public $currencyCode = 'RUB';
 
     /**
      * @var float Наценка в момент обновления
      */
-    public $markupOnUpdate                       = 0;
+    public $markupOnUpdate = 0;
 
 
     /**
@@ -42,7 +44,7 @@ class Money extends \skeeks\cms\base\Component
     static public function descriptorConfig()
     {
         return array_merge(parent::descriptorConfig(), [
-            'name'          => \Yii::t('skeeks/money','Currency and Money'),
+            'name' => \Yii::t('skeeks/money', 'Currency and Money'),
         ]);
     }
 
@@ -58,21 +60,23 @@ class Money extends \skeeks\cms\base\Component
     public function attributeLabels()
     {
         return ArrayHelper::merge(parent::attributeLabels(), [
-            'currencyCode'                => \Yii::t('skeeks/money','Default currency'),
-            'markupOnUpdate'              => \Yii::t('skeeks/money','Mark-up at the time of update'),
+            'currencyCode' => \Yii::t('skeeks/money', 'Default currency'),
+            'markupOnUpdate' => \Yii::t('skeeks/money', 'Mark-up at the time of update'),
         ]);
     }
+
     public function attributeHints()
     {
         return ArrayHelper::merge(parent::attributeHints(), [
-            'markupOnUpdate'              => \Yii::t('skeeks/money','In the process of updating the data currency, this mark-up will be added to price, specify a percentage').' (%)',
+            'markupOnUpdate' => \Yii::t('skeeks/money',
+                    'In the process of updating the data currency, this mark-up will be added to price, specify a percentage') . ' (%)',
         ]);
     }
 
     public function renderConfigForm(ActiveForm $form)
     {
         echo \Yii::$app->view->renderFile(__DIR__ . '/_form.php', [
-            'form'  => $form,
+            'form' => $form,
             'model' => $this
         ], $this);
     }
@@ -103,11 +107,10 @@ class Money extends \skeeks\cms\base\Component
      */
     public function newMoney($ammount = '0', $currency = null)
     {
-        if ($currency === null)
-        {
+        if ($currency === null) {
             $currency = $this->currencyCode;
         }
-        return \skeeks\modules\cms\money\Money::fromString((string) $ammount, $currency);
+        return \skeeks\modules\cms\money\Money::fromString((string)$ammount, $currency);
     }
 
     static public $lanquages = [];
@@ -120,13 +123,11 @@ class Money extends \skeeks\cms\base\Component
      */
     public function intlFormatter($language = null)
     {
-        if ($language === null)
-        {
+        if ($language === null) {
             $language = \Yii::$app->language;
         }
 
-        if (isset(self::$lanquages[$language]))
-        {
+        if (isset(self::$lanquages[$language])) {
             return self::$lanquages[$language];
         }
 
@@ -147,8 +148,7 @@ class Money extends \skeeks\cms\base\Component
      */
     public function convertAndFormat(\skeeks\modules\cms\money\Money $money, $language = null, $currency = null)
     {
-        if (!$currency)
-        {
+        if (!$currency) {
             $currency = $this->currencyCode;
         }
 
@@ -165,18 +165,13 @@ class Money extends \skeeks\cms\base\Component
         $cbrf = new ExchangeRatesCBRF();
         $data = $cbrf->GetRates();
 
-        if ($data['byChCode'])
-        {
-            foreach ($data['byChCode'] as $code => $value)
-            {
-                if ($currency = \skeeks\modules\cms\money\models\Currency::find()->where(['code' => $code])->one())
-                {
+        if ($data['byChCode']) {
+            foreach ($data['byChCode'] as $code => $value) {
+                if ($currency = \skeeks\modules\cms\money\models\Currency::find()->where(['code' => $code])->one()) {
                     //TODO: хардкод (
-                    if ($currency->code != "RUB")
-                    {
-                        $currency->course = $value + ($value * $this->markupOnUpdate/100); //+наценка
-                    } else
-                    {
+                    if ($currency->code != "RUB") {
+                        $currency->course = $value + ($value * $this->markupOnUpdate / 100); //+наценка
+                    } else {
                         $currency->course = $value; //+наценка
                     }
 

@@ -8,7 +8,9 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\interfaces;
+
 use skeeks\modules\cms\money\Money;
 
 /**

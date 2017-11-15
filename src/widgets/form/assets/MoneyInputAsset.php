@@ -8,7 +8,9 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\widgets\form\assets;
+
 use yii\web\AssetBundle;
 
 /**
@@ -23,9 +25,9 @@ class MoneyInputAsset extends AssetBundle
         //'money-input.css',
     ];
     public $js =
-    [
-        //'money-input.js',
-    ];
+        [
+            //'money-input.js',
+        ];
     public $depends = [
         '\skeeks\sx\assets\Core',
     ];

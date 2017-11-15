@@ -10,6 +10,7 @@
  */
 
 namespace skeeks\modules\cms\money\assets;
+
 use skeeks\cms\base\AssetBundle;
 
 /**

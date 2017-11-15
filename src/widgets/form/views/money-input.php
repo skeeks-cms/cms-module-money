@@ -19,27 +19,28 @@ $clientOptionsJson = \yii\helpers\Json::encode($clientOptions);
 
 
 ?>
-<div id="<?= $id; ?>" class="sx-widget-form-elements-money">
-    <div class="row">
-        <div class="col-lg-3">
-            <?= \yii\helpers\Html::activeTextInput($model, $widget->fieldNameAmmount, ['class' => 'form-control']); ?>
-        </div>
+    <div id="<?= $id; ?>" class="sx-widget-form-elements-money">
+        <div class="row">
+            <div class="col-lg-3">
+                <?= \yii\helpers\Html::activeTextInput($model, $widget->fieldNameAmmount,
+                    ['class' => 'form-control']); ?>
+            </div>
 
-        <div class="col-lg-1">
-            <? echo \skeeks\widget\chosen\Chosen::widget([
-                    'allowDeselect'     => false,
-                    'model'     => $model,
-                    'allowDeselect'     => false,
+            <div class="col-lg-1">
+                <? echo \skeeks\widget\chosen\Chosen::widget([
+                    'allowDeselect' => false,
+                    'model' => $model,
+                    'allowDeselect' => false,
                     'attribute' => $widget->fieldNameCurrency,
-                    'items'     => \yii\helpers\ArrayHelper::map(
+                    'items' => \yii\helpers\ArrayHelper::map(
                         \Yii::$app->money->getActiveCurrency(),
                         'code', 'code'
                     )
                 ]);
-            ?>
+                ?>
+            </div>
         </div>
     </div>
-</div>
 
 <?= $this->registerJs(<<<JS
     (function(sx, $, _)
@@ -61,4 +62,4 @@ $clientOptionsJson = \yii\helpers\Json::encode($clientOptions);
         new sx.classes.widgets.MoneyInput('#{$id}', {$clientOptionsJson});
     })(sx, sx.$, sx._);
 JS
-)?>
+) ?>

@@ -8,6 +8,7 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money\widgets\form;
 
 use Yii;
@@ -26,16 +27,15 @@ class MoneyInput extends InputWidget
      */
     public $clientOptions = [];
 
-    public $fieldNameAmmount        = 'ammount';
-    public $fieldNameCurrency       = 'currency';
+    public $fieldNameAmmount = 'ammount';
+    public $fieldNameCurrency = 'currency';
 
-    public $name                    = '';
+    public $name = '';
 
     private function _initAndValidate()
     {
-        if (!$this->hasModel())
-        {
-            throw new Exception(\Yii::t('skeeks/money',"This file is only designed for the model forms"));
+        if (!$this->hasModel()) {
+            throw new Exception(\Yii::t('skeeks/money', "This file is only designed for the model forms"));
         }
     }
 
@@ -44,32 +44,30 @@ class MoneyInput extends InputWidget
      */
     public function run()
     {
-        try
-        {
+        try {
             $this->_initAndValidate();
             $this->registerClientScript();
 
-            $id         = "sx-id-" . Yii::$app->security->generateRandomString(6);
+            $id = "sx-id-" . Yii::$app->security->generateRandomString(6);
 
             $clientOptions = ArrayHelper::merge($this->clientOptions, [
-                'fieldNameAmmount'      => $this->fieldNameAmmount,
-                'fieldNameCurrency'     => $this->fieldNameCurrency,
+                'fieldNameAmmount' => $this->fieldNameAmmount,
+                'fieldNameCurrency' => $this->fieldNameCurrency,
 
-                'backend'        => \skeeks\cms\helpers\UrlHelper::construct('money/ajax/data')->toString(),
+                'backend' => \skeeks\cms\helpers\UrlHelper::construct('money/ajax/data')->toString(),
             ]);
 
             return $this->render('money-input', [
-                'widget'            => $this,
-                'id'                => $id,
-                'model'             => $this->model,
-                'clientOptions'     => $clientOptions,
+                'widget' => $this,
+                'id' => $id,
+                'model' => $this->model,
+                'clientOptions' => $clientOptions,
 
-                'fieldNameAmmount'          => $this->fieldNameAmmount,
-                'fieldNameCurrency'         => $this->fieldNameCurrency,
+                'fieldNameAmmount' => $this->fieldNameAmmount,
+                'fieldNameCurrency' => $this->fieldNameCurrency,
             ]);
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
 

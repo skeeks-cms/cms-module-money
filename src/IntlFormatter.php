@@ -8,6 +8,7 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money;
 
 use NumberFormatter;
@@ -49,11 +50,9 @@ class IntlFormatter implements Formatter
      */
     public function format(Money $money = null)
     {
-        if (!$money)
-        {
+        if (!$money) {
             return null;
-        } else
-        {
+        } else {
             return $this->numberFormatter->formatCurrency(
                 $money->getAmount() / $money->getCurrency()->getSubUnit(),
                 $money->getCurrency()->getCurrencyCode()

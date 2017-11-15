@@ -5,7 +5,9 @@
  * @copyright 2010 SkeekS (СкикС)
  * @date 07.03.2015
  */
+
 namespace skeeks\modules\cms\money\console\controllers;
+
 use yii\console\Controller;
 
 /**
@@ -20,6 +22,6 @@ class AgentsController extends Controller
     public function actionUpdateCourses()
     {
         \Yii::$app->money->processUpdateCourses();
-        \Yii::info(\Yii::t('skeeks/money',"Exchange rates are updated"));
+        \Yii::info(\Yii::t('skeeks/money', "Exchange rates are updated"));
     }
 }

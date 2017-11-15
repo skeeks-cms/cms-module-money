@@ -8,7 +8,9 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
+
 namespace skeeks\modules\cms\money;
+
 use skeeks\modules\cms\money\exceptions\CurrencyMismatchException;
 use skeeks\modules\cms\money\exceptions\InvalidArgumentException;
 use skeeks\modules\cms\money\exceptions\OverflowException;
@@ -48,23 +50,21 @@ class Money implements \JsonSerializable
     );
 
     /**
-     * @param  integer|float                                  $amount
+     * @param  integer|float $amount
      * @param  Currency|string $currency
      * @throws InvalidArgumentException
      */
     public function __construct($amount, $currency)
     {
-        if (is_int($amount))
-        {
-            $amount = (float) $amount;
+        if (is_int($amount)) {
+            $amount = (float)$amount;
         }
 
-        if (!is_float($amount))
-        {
+        if (!is_float($amount)) {
             throw new InvalidArgumentException('$amount must be an integer or float');
         }
 
-        $this->amount   = $amount;
+        $this->amount = $amount;
         $this->currency = Currency::getInstance($currency);
     }
 
@@ -78,7 +78,7 @@ class Money implements \JsonSerializable
      * number of fractional digits then the value will be rounded to the
      * currency's number of fractional digits.
      *
-     * @param  string                                   $value
+     * @param  string $value
      * @param  Currency|string $currency
      * @return Money
      * @throws InvalidArgumentException
@@ -92,7 +92,7 @@ class Money implements \JsonSerializable
         $currency = Currency::getInstance($currency);
 
         return new static(
-            //intval(
+        //intval(
             floatval(
                 round(
                     $currency->getSubUnit() *
@@ -137,7 +137,7 @@ class Money implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'amount'   => $this->amount,
+            'amount' => $this->amount,
             'currency' => $this->currency->getCurrencyCode()
         ];
     }
@@ -210,7 +210,7 @@ class Money implements \JsonSerializable
      * Returns a new Money object that represents the monetary value
      * of this Money object multiplied by a given factor.
      *
-     * @param  float   $factor
+     * @param  float $factor
      * @param  integer $roundingMode
      * @return Money
      * @throws InvalidArgumentException
@@ -219,7 +219,7 @@ class Money implements \JsonSerializable
     {
         if (!in_array($roundingMode, self::$roundingModes)) {
             throw new InvalidArgumentException(
-                '$roundingMode '.\Yii::t('skeeks/money','must be a valid rounding mode').' (PHP_ROUND_*)'
+                '$roundingMode ' . \Yii::t('skeeks/money', 'must be a valid rounding mode') . ' (PHP_ROUND_*)'
             );
         }
 
@@ -240,19 +240,18 @@ class Money implements \JsonSerializable
      */
     public function allocateToTargets($n)
     {
-        if (is_int($n))
-        {
-            $n = (float) $n;
+        if (is_int($n)) {
+            $n = (float)$n;
         }
 
         if (!is_float($n)) {
-            throw new InvalidArgumentException('$n '.\Yii::t('skeeks/money','must be an integer'));
+            throw new InvalidArgumentException('$n ' . \Yii::t('skeeks/money', 'must be an integer'));
         }
 
-        $low       = $this->newMoney(floatval($this->amount / $n));
-        $high      = $this->newMoney($low->getAmount() + 1);
+        $low = $this->newMoney(floatval($this->amount / $n));
+        $high = $this->newMoney($low->getAmount() + 1);
         $remainder = $this->amount % $n;
-        $result    = array();
+        $result = array();
 
         for ($i = 0; $i < $remainder; $i++) {
             $result[] = $high;
@@ -275,13 +274,13 @@ class Money implements \JsonSerializable
     public function allocateByRatios(array $ratios)
     {
         /** @var Money[] $result */
-        $result    = array();
-        $total     = array_sum($ratios);
+        $result = array();
+        $total = array_sum($ratios);
         $remainder = $this->amount;
 
         for ($i = 0; $i < count($ratios); $i++) {
-            $amount     = $this->castToFloat($this->amount * $ratios[$i] / $total);
-            $result[]   = $this->newMoney($amount);
+            $amount = $this->castToFloat($this->amount * $ratios[$i] / $total);
+            $result[] = $this->newMoney($amount);
             $remainder -= $amount;
         }
 
@@ -315,7 +314,7 @@ class Money implements \JsonSerializable
 
         return array(
             'percentage' => $percentage,
-            'subtotal'   => $this->subtract($percentage)
+            'subtotal' => $this->subtract($percentage)
         );
     }
 
@@ -478,13 +477,12 @@ class Money implements \JsonSerializable
     {
         $currencyTo = Currency::getInstance($currencyTo);
 
-        if ($crossCourse = $this->getCurrency()->getCrossCourse($currencyTo))
-        {
+        if ($crossCourse = $this->getCurrency()->getCrossCourse($currencyTo)) {
             $newMoney = $this->multiply($crossCourse);
             return new static($newMoney->getAmount(), $currencyTo);
-        } else
-        {
-            throw new InvalidArgumentException(\Yii::t('skeeks/money','Unable to get the cross rate for the currency'). ' ' . $currencyTo->getCurrencyCode());
+        } else {
+            throw new InvalidArgumentException(\Yii::t('skeeks/money',
+                    'Unable to get the cross rate for the currency') . ' ' . $currencyTo->getCurrencyCode());
         }
     }
 }

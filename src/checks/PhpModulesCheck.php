@@ -5,7 +5,9 @@
  * @copyright 2010 SkeekS (СкикС)
  * @date 26.04.2015
  */
+
 namespace skeeks\modules\cms\money\checks;
+
 use skeeks\cms\base\CheckComponent;
 
 /**
@@ -17,21 +19,18 @@ class PhpModulesCheck extends \skeeks\cms\checks\PhpModulesCheck
     public function run()
     {
         $arMods = [
-			'soap'                  => \Yii::t('skeeks/money','Functions')." soap, php-mod-soap",
-			'intl'                  => \Yii::t('skeeks/money','Functions')." intl, php-mod-intl",
-			'simplexml'             => \Yii::t('skeeks/money','Functions')." simplexml, php-mod-simplexml",
-		];
+            'soap' => \Yii::t('skeeks/money', 'Functions') . " soap, php-mod-soap",
+            'intl' => \Yii::t('skeeks/money', 'Functions') . " intl, php-mod-intl",
+            'simplexml' => \Yii::t('skeeks/money', 'Functions') . " simplexml, php-mod-simplexml",
+        ];
 
         $strError = '';
-		foreach($arMods as $func => $desc)
-		{
-			if (!extension_loaded("soap"))
-            {
+        foreach ($arMods as $func => $desc) {
+            if (!extension_loaded("soap")) {
                 $this->addError($desc);
-            } else
-            {
+            } else {
                 $this->addSuccess($desc);
             }
-		}
+        }
     }
 }
