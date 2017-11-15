@@ -1,13 +1,13 @@
 Процесс разработки модуля.
 ==============
 
-3.1.1
+3.0.2
 -----------------
  * Code style
  * Change source dir to src
  * Agents config update
  
-3.1.0
+3.0.1
 -----------------
  * Using composer-config-plugin
  
