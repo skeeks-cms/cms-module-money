@@ -1,6 +1,11 @@
 Процесс разработки модуля.
 ==============
 
+3.1.1
+-----------------
+ * Change source dir to src
+ * Agents config update
+ 
 3.1.0
 -----------------
  * Using composer-config-plugin

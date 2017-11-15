@@ -16,17 +16,23 @@
         }
     ],
     "require": {
-        "skeeks/cms": "*"
+        "skeeks/cms": "~5.0 || dev-master"
     },
     "autoload": {
         "psr-4": {
-            "skeeks\\modules\\cms\\money\\": ""
+            "skeeks\\modules\\cms\\money\\": "src/"
         }
     },
     "extra": {
         "config-plugin": {
-            "web": "config/main.php",
-            "console": "config/main-console.php"
+            "web": [
+                "src/config/common.php",
+                "src/config/web.php"
+            ],
+            "console": [
+                "src/config/common.php",
+                "src/config/console.php"
+            ]
         }
     }
 }
