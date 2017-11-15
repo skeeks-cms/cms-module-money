@@ -19,7 +19,7 @@ use skeeks\cms\base\AssetBundle;
  */
 class Asset extends AssetBundle
 {
-    public $sourcePath = '@vendor/skeeks/cms-module-money/assets';
+    public $sourcePath = '@skeeks/modules/cms/money/assets';
 
     public $css = [
     ];
