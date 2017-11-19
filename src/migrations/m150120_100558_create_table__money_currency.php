@@ -35,7 +35,7 @@ class m150120_100558_create_table__money_currency extends Migration
 
             'name' => Schema::TYPE_STRING . '(255) NULL',
             'name_full' => Schema::TYPE_STRING . '(255) NULL',
-            'course' => Schema::TYPE_STRING . '(255) NULL',
+            'course' => $this->decimal(10,6)->notNull()->defaultValue(0),
         ], $tableOptions);
 
         $this->createIndex('money_currency__status', $table, 'status');

@@ -13,7 +13,7 @@ class m150902_110558_alter_table__money_currency extends Migration
 {
     public function safeUp()
     {
-        $this->execute("ALTER TABLE {{%money_currency}} CHANGE `course` `course` DECIMAL(10,6) NULL DEFAULT NULL; ");
+        return true;
     }
 
     public function down()
