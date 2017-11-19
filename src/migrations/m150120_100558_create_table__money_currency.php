@@ -8,15 +8,16 @@
  * @date 25.01.2015
  * @since 1.0.0
  */
-
 use yii\db\Schema;
 use yii\db\Migration;
 
 class m150120_100558_create_table__money_currency extends Migration
 {
-    public function up()
+    public function safeUp()
     {
-        $tableExist = $this->db->getTableSchema("{{%money_currency}}", true);
+        $table = "{{%money_currency}}";
+
+        $tableExist = $this->db->getTableSchema($table, true);
         if ($tableExist) {
             return true;
         }
@@ -26,26 +27,21 @@ class m150120_100558_create_table__money_currency extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
 
-        $this->createTable("{{%money_currency}}", [
-            'id' => Schema::TYPE_PK,
+        $this->createTable($table, [
+            'id' => $this->primaryKey(),
 
-            'code' => Schema::TYPE_STRING . '(3) NOT NULL',
-            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10', //статус, активна некативна, удалено
+            'code' => $this->string(3)->notNull()->unique(),
+            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
 
-            'name' => Schema::TYPE_STRING . '(255) NULL', //статус, активна некативна, удалено
-            'name_full' => Schema::TYPE_STRING . '(255) NULL', //статус, активна некативна, удалено
-            'course' => Schema::TYPE_STRING . '(255) NULL', //статус, активна некативна, удалено
-
+            'name' => Schema::TYPE_STRING . '(255) NULL',
+            'name_full' => Schema::TYPE_STRING . '(255) NULL',
+            'course' => Schema::TYPE_STRING . '(255) NULL',
         ], $tableOptions);
 
-        $this->execute("ALTER TABLE {{%money_currency}} ADD UNIQUE(code);");
-        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(status);");
-        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(course);");
-        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(name_full);");
-        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(name);");
-
-        $this->execute("ALTER TABLE {{%money_currency}} COMMENT = 'Валюты';");
-
+        $this->createIndex('money_currency__status', $table, 'status');
+        $this->createIndex('money_currency__course', $table, 'course');
+        $this->createIndex('money_currency__name_full', $table, 'name_full');
+        $this->createIndex('money_currency__name', $table, 'name');
     }
 
     public function down()

@@ -13,9 +13,9 @@ class m150601_110558_alter_table__money_currency extends Migration
 {
     public function safeUp()
     {
-        $this->execute("ALTER TABLE {{%money_currency}} DROP `status`; ");
-        $this->execute("ALTER TABLE {{%money_currency}} ADD `active` CHAR(1) NOT NULL DEFAULT 'N'");
-        $this->execute("ALTER TABLE {{%money_currency}} ADD INDEX(active);");
+        $this->dropColumn('{{%money_currency}}', 'status');
+        $this->addColumn('{{%money_currency}}', 'active', $this->char(1)->notNull()->defaultValue('N'));
+        $this->createIndex('money_currency__active', '{{%money_currency}}', 'active');
     }
 
     public function down()

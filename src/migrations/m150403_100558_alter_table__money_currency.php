@@ -13,7 +13,7 @@ class m150403_100558_alter_table__money_currency extends Migration
 {
     public function safeUp()
     {
-        $this->execute("ALTER TABLE {{%money_currency}} ADD `priority` INT NOT NULL DEFAULT '0' ;");
+        $this->addColumn('{{%money_currency}}', "priority", $this->integer()->notNull()->defaultValue(0));
     }
 
     public function down()

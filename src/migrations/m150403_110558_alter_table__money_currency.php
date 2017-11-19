@@ -13,8 +13,17 @@ class m150403_110558_alter_table__money_currency extends Migration
 {
     public function safeUp()
     {
-        $this->execute("UPDATE {{%money_currency}} SET `status` = '0' ");
-        $this->execute("ALTER TABLE {{%money_currency}} CHANGE `status` `status` SMALLINT(1) NOT NULL DEFAULT '0';");
+        $this->update('{{%money_currency}}', [
+            'status' => 0
+        ]);
+
+        if ($this->db->driverName == 'pgsql') {
+            $this->alterColumn('{{%money_currency}}', 'status', $this->smallInteger(1));
+            $this->alterColumn('{{%money_currency}}', "status", "SET NOT NULL");
+            $this->alterColumn('{{%money_currency}}', "status", "SET DEFAULT 0");
+        } else {
+            $this->alterColumn('{{%money_currency}}', 'status', $this->smallInteger(1)->notNull()->defaultValue(0));
+        }
     }
 
     public function down()
