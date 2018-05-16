@@ -13,9 +13,4 @@ return [
         ],
     ],
 
-    'modules' => [
-        'money' => [
-            'class' => 'skeeks\modules\cms\money\Module',
-        ],
-    ],
 ];
