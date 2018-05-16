@@ -6,18 +6,16 @@
  * @date 15.06.2015
  */
 return [
-    'components' =>
-        [
-            'money' => [
-                'class' => 'skeeks\modules\cms\money\components\money\Money',
-            ]
+    'components' => [
+        'money' => [
+            'class' => 'skeeks\modules\cms\money\components\money\Money',
         ],
+    ],
 
-    'modules' =>
-        [
-            'money' => [
-                'class' => 'skeeks\modules\cms\money\Module',
-                'controllerNamespace' => 'skeeks\modules\cms\money\console\controllers'
-            ]
-        ]
+    'modules' => [
+        'money' => [
+            'class'               => 'skeeks\modules\cms\money\Module',
+            'controllerNamespace' => 'skeeks\modules\cms\money\console\controllers',
+        ],
+    ],
 ];

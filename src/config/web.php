@@ -1,47 +1,21 @@
 <?php
 /**
- * main
- *
+ * @link https://cms.skeeks.com/
+ * @copyright Copyright (c) 2010 SkeekS
+ * @license https://cms.skeeks.com/license/
  * @author Semenov Alexander <semenov@skeeks.com>
- * @link http://skeeks.com/
- * @copyright 2010-2014 SkeekS (Sx)
- * @date 25.01.2015
- * @since 1.0.0
  */
 return [
 
-    'components' =>
-        [
-            'money' => [
-                'class' => 'skeeks\modules\cms\money\components\money\Money',
-            ],
-
-            'i18n' => [
-                'translations' =>
-                    [
-                        'skeeks/money' => [
-                            'class' => 'yii\i18n\PhpMessageSource',
-                            'basePath' => '@skeeks/modules/cms/money/messages',
-                            'fileMap' => [
-                                'skeeks/money' => 'main.php',
-                            ],
-                        ],
-
-                        'skeeks/money/meny' => [
-                            'class' => 'yii\i18n\PhpMessageSource',
-                            'basePath' => '@skeeks/modules/cms/money/messages',
-                            'fileMap' => [
-                                'skeeks/money/meny' => 'meny.php',
-                            ],
-                        ]
-                    ]
-            ],
+    'components' => [
+        'money' => [
+            'class' => 'skeeks\modules\cms\money\components\money\Money',
         ],
+    ],
 
-    'modules' =>
-        [
-            'money' => [
-                'class' => 'skeeks\modules\cms\money\Module',
-            ]
-        ]
+    'modules' => [
+        'money' => [
+            'class' => 'skeeks\modules\cms\money\Module',
+        ],
+    ],
 ];
