@@ -141,12 +141,12 @@ class Money extends \skeeks\cms\money\MoneyComponent
     /**
      * Сконвертировать и отформатировать для текущих настроек
      *
-     * @param \skeeks\modules\cms\money\Money $money
+     * @param \skeeks\cms\money\Money $money
      * @param null $language
      * @param null $currency
      * @return string
      */
-    public function convertAndFormat(\skeeks\modules\cms\money\Money $money, $language = null, $currency = null)
+    public function convertAndFormat($money, $language = null, $currency = null)
     {
         if (!$currency) {
             $currency = $this->currencyCode;
