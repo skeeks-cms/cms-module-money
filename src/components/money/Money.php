@@ -21,67 +21,13 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 
 /**
- * Class Money
- * @package skeeks\modules\cms\money\components\money
+ * @deprecated
  */
 class Money extends \skeeks\cms\money\MoneyComponent
 {
     /**
-     * @var string текущая валюта
-     */
-    public $currencyCode = 'RUB';
-
-    /**
-     * @var float Наценка в момент обновления
-     */
-    public $markupOnUpdate = 0;
-
-
-    /**
-     * Можно задать название и описание компонента
-     * @return array
-     */
-    static public function descriptorConfig()
-    {
-        return array_merge(parent::descriptorConfig(), [
-            'name' => \Yii::t('skeeks/money', 'Currency and Money'),
-        ]);
-    }
-
-
-    public function rules()
-    {
-        return ArrayHelper::merge(parent::rules(), [
-            [['currencyCode'], 'string'],
-            [['markupOnUpdate'], 'number'],
-        ]);
-    }
-
-    public function attributeLabels()
-    {
-        return ArrayHelper::merge(parent::attributeLabels(), [
-            'currencyCode' => \Yii::t('skeeks/money', 'Default currency'),
-            'markupOnUpdate' => \Yii::t('skeeks/money', 'Mark-up at the time of update'),
-        ]);
-    }
-
-    public function attributeHints()
-    {
-        return ArrayHelper::merge(parent::attributeHints(), [
-            'markupOnUpdate' => \Yii::t('skeeks/money',
-                    'In the process of updating the data currency, this mark-up will be added to price, specify a percentage') . ' (%)',
-        ]);
-    }
-
-    public function renderConfigForm(ActiveForm $form)
-    {
-        echo \Yii::$app->view->renderFile(__DIR__ . '/_form.php', [
-            'form' => $form,
-            'model' => $this
-        ], $this);
-    }
-
-    /**
+     * @deprecated
+     *
      * @return array|\yii\db\ActiveRecord[]
      */
     public function getActiveCurrencies()
@@ -90,6 +36,8 @@ class Money extends \skeeks\cms\money\MoneyComponent
     }
 
     /**
+     * @deprecated
+     *
      * Объект текущей валюты
      *
      * @return Currency
@@ -100,6 +48,8 @@ class Money extends \skeeks\cms\money\MoneyComponent
     }
 
     /**
+     * @deprecated
+     *
      * Новый объект денег с текущей валютой
      *
      * @param string $ammount
@@ -116,6 +66,8 @@ class Money extends \skeeks\cms\money\MoneyComponent
     static public $lanquages = [];
 
     /**
+     * @deprecated
+     *
      * Объект IntlFormatter 1 раз за сценарий
      *
      * @param null $language
@@ -139,6 +91,8 @@ class Money extends \skeeks\cms\money\MoneyComponent
 
 
     /**
+     * @deprecated
+     *
      * Сконвертировать и отформатировать для текущих настроек
      *
      * @param \skeeks\cms\money\Money $money
@@ -158,6 +112,8 @@ class Money extends \skeeks\cms\money\MoneyComponent
     }
 
     /**
+     * @deprecated
+     *
      * @return $this
      */
     public function processUpdateCourses()
