@@ -45,17 +45,17 @@ class IntlFormatter implements Formatter
     /**
      * Formats a Money object using PHP's built-in NumberFormatter.
      *
-     * @param  Money $money
+     * @param  \skeeks\cms\money\Money $money
      * @return string
      */
-    public function format(Money $money = null)
+    public function format($money = null)
     {
         if (!$money) {
             return null;
         } else {
             return $this->numberFormatter->formatCurrency(
-                $money->getAmount() / $money->getCurrency()->getSubUnit(),
-                $money->getCurrency()->getCurrencyCode()
+                $money->amount,
+                $money->currency->code
             );
         }
 
