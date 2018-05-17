@@ -28,5 +28,5 @@ interface Formatter
      * @param  Money $money
      * @return string
      */
-    public function format(Money $money);
+    public function format($money);
 }
