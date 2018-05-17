@@ -25,43 +25,6 @@ use yii\widgets\ActiveForm;
  */
 class Money extends \skeeks\cms\money\MoneyComponent
 {
-    /**
-     * @deprecated
-     *
-     * @return array|\yii\db\ActiveRecord[]
-     */
-    public function getActiveCurrencies()
-    {
-        return \skeeks\modules\cms\money\models\Currency::find()->active()->all();
-    }
-
-    /**
-     * @deprecated
-     *
-     * Объект текущей валюты
-     *
-     * @return Currency
-     */
-    public function getCurrencyObject()
-    {
-        return Currency::getInstance(\Yii::$app->money->currencyCode);
-    }
-
-    /**
-     * @deprecated
-     *
-     * Новый объект денег с текущей валютой
-     *
-     * @param string $ammount
-     * @return \skeeks\modules\cms\money\Money
-     */
-    public function newMoney($ammount = '0', $currency = null)
-    {
-        if ($currency === null) {
-            $currency = $this->currencyCode;
-        }
-        return \skeeks\modules\cms\money\Money::fromString((string)$ammount, $currency);
-    }
 
     static public $lanquages = [];
 
