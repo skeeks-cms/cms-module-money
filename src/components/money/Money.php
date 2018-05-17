@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
  * Class Money
  * @package skeeks\modules\cms\money\components\money
  */
-class Money extends \skeeks\cms\base\Component
+class Money extends \skeeks\cms\money\MoneyComponent
 {
     /**
      * @var string текущая валюта
